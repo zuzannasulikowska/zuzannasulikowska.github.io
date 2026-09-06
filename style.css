@@ -67,7 +67,7 @@ a {
     position: absolute;
     top: 30px;
     left: var(--padding);
-    font-size: 10px;
+    font-size: var(--fs-little);
     letter-spacing: 0.05em;
 
 }
@@ -301,58 +301,34 @@ a {
 
 
 
-/* =========================================================
-   INTRO
-========================================================= */
+/* INTRO */
 
 .intro {
-
     min-height: 100vh;
-
     padding:
         160px var(--padding)
         160px
         calc(var(--padding) + var(--axis));
-
     display: grid;
-
-    grid-template-columns:
-        45% 55%;
-
+    grid-template-columns: 45% 55%;
     align-items: center;
-
-    border-top:
-        1px solid var(--line);
-
+    border-top: 1px solid var(--line);
     overflow: hidden;
-
 }
 
 .intro-content {
-
     position: relative;
-
     z-index: 2;
-
 }
 
 .black-label {
-
     display: inline-block;
-
     background: var(--black);
-
     color: var(--cream);
-
-    padding:
-        9px 14px;
-
-    font-size: 8px;
-
+    padding: 9px 14px;
+    font-size: var(--fs-small);
     text-transform: uppercase;
-
     letter-spacing: 0.08em;
-
 }
 
 .intro h2 {
@@ -1067,6 +1043,582 @@ a {
 }
 
 
+/* =====================================================
+   PROJECT
+===================================================== */
+
+.project-01 {
+    position: relative;
+
+    min-height: 100vh;
+
+    padding: 120px 8vw;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   ORIGINAL IMAGE
+===================================================== */
+
+.project-image-wrap {
+    position: relative;
+
+    width: min(42vw, 600px);
+
+    margin: 80px auto 0;
+}
+
+
+.project-image {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+    aspect-ratio: 1;
+
+    padding: 0;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    background: #302727;
+}
+
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.8s cubic-bezier(.16,1,.3,1);
+}
+
+
+.project-image:hover img {
+    transform: scale(1.06);
+}
+
+
+/* little interaction label */
+
+.project-image-hint {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    padding: 10px 14px;
+
+    background: #171414;
+    color: #e1d5d2;
+
+    font-size: 8px;
+    letter-spacing: .18em;
+
+    opacity: 0;
+
+    transition: opacity .4s ease;
+
+    pointer-events: none;
+}
+
+
+.project-image:hover .project-image-hint {
+    opacity: 1;
+}
+
+
+/* =====================================================
+   EXPANDED PROJECT
+===================================================== */
+
+.jazz-expanded {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    overflow: hidden;
+}
+
+
+/* dark layer over website */
+
+.jazz-expanded__background {
+
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(20, 17, 17, .92);
+
+    opacity: 0;
+}
+
+
+/*
+   This is the actual project canvas.
+
+   Same dusty mauve feeling as the PDF.
+*/
+
+.jazz-expanded::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background: #b59e9e;
+
+    opacity: 0;
+
+    z-index: -1;
+}
+
+
+/* =====================================================
+   CLOSE
+===================================================== */
+
+.jazz-expanded__close {
+
+    position: absolute;
+
+    top: 35px;
+    right: 40px;
+
+    width: 75px;
+    height: 75px;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 30;
+}
+
+
+.jazz-expanded__close span {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: 32px;
+    height: 1px;
+
+    background: #171414;
+}
+
+
+.jazz-expanded__close span:first-child {
+
+    transform:
+        translate(-50%, -50%)
+        rotate(45deg);
+}
+
+
+.jazz-expanded__close span:nth-child(2) {
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-45deg);
+}
+
+
+.jazz-expanded__close small {
+
+    position: absolute;
+
+    left: 50%;
+    bottom: 0;
+
+    transform: translateX(-50%);
+
+    font-size: 8px;
+
+    letter-spacing: .2em;
+
+    white-space: nowrap;
+}
+
+
+/* =====================================================
+   MAIN CIRCLE
+===================================================== */
+
+.jazz-expanded__main {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    width: min(38vw, 570px);
+
+    aspect-ratio: 1;
+
+    transform:
+        translate(-50%, -50%);
+
+    z-index: 5;
+}
+
+
+.jazz-expanded__main-circle {
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    transform: scale(0);
+
+    background: #292323;
+}
+
+
+.jazz-expanded__main-circle img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =====================================================
+   ADDITIONAL PROJECT CIRCLES
+===================================================== */
+
+.jazz-circle {
+
+    position: absolute;
+
+    width: clamp(120px, 13vw, 190px);
+
+    aspect-ratio: 1;
+
+    border-radius: 50%;
+
+    overflow: hidden;
+
+    z-index: 6;
+
+    transform: scale(0);
+
+    opacity: 0;
+
+    background: #292323;
+}
+
+
+.jazz-circle img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/*
+   They are intentionally NOT symmetrical.
+
+   This is important because your PDF
+   doesn't have a perfectly symmetrical
+   "design system".
+*/
+
+.jazz-circle--1 {
+
+    left: 12vw;
+    top: 15vh;
+}
+
+
+.jazz-circle--2 {
+
+    right: 11vw;
+    top: 13vh;
+}
+
+
+.jazz-circle--3 {
+
+    left: 16vw;
+    bottom: 12vh;
+}
+
+
+.jazz-circle--4 {
+
+    right: 17vw;
+    bottom: 9vh;
+}
+
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+.jazz-expanded__text {
+
+    position: absolute;
+
+    left: 7vw;
+    bottom: 8vh;
+
+    width: min(350px, 30vw);
+
+    z-index: 15;
+
+    opacity: 0;
+
+    transform: translateY(40px);
+}
+
+
+.jazz-expanded__text .black-label {
+
+    display: inline-block;
+
+    margin-bottom: 20px;
+
+    padding: 9px 13px;
+
+    background: #171414;
+
+    color: #e2d7d4;
+
+    font-size: 8px;
+
+    letter-spacing: .15em;
+}
+
+
+.jazz-expanded__text h3 {
+
+    margin: 0 0 25px;
+
+    font-size: clamp(50px, 6vw, 90px);
+
+    line-height: .82;
+
+    font-weight: 300;
+
+    letter-spacing: -.05em;
+}
+
+
+.jazz-expanded__text p {
+
+    margin: 0 0 14px;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    max-width: 330px;
+}
+
+
+/* =====================================================
+   DETAILS
+===================================================== */
+
+.jazz-expanded__details {
+
+    display: flex;
+
+    gap: 30px;
+
+    margin-top: 30px;
+}
+
+
+.jazz-expanded__details div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.jazz-expanded__details span {
+
+    font-size: 9px;
+
+    opacity: .55;
+}
+
+
+.jazz-expanded__details strong {
+
+    font-size: 8px;
+
+    letter-spacing: .12em;
+
+    font-weight: 400;
+}
+
+
+/* =====================================================
+   HUGE 01
+===================================================== */
+
+.jazz-expanded__number {
+
+    position: absolute;
+
+    right: -2vw;
+    bottom: -7vw;
+
+    font-size: min(38vw, 580px);
+
+    line-height: .8;
+
+    font-weight: 300;
+
+    color: rgba(20, 17, 17, .08);
+
+    z-index: 1;
+
+    opacity: 0;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .project-01 {
+
+        padding: 80px 25px;
+    }
+
+
+    .project-image-wrap {
+
+        width: 75vw;
+
+        margin-top: 60px;
+    }
+
+
+    .jazz-expanded__main {
+
+        width: 60vw;
+
+        top: 38%;
+    }
+
+
+    .jazz-circle {
+
+        width: 25vw;
+    }
+
+
+    .jazz-circle--1 {
+        left: 4vw;
+        top: 13vh;
+    }
+
+
+    .jazz-circle--2 {
+        right: 3vw;
+        top: 15vh;
+    }
+
+
+    .jazz-circle--3 {
+        left: 4vw;
+        bottom: 18vh;
+    }
+
+
+    .jazz-circle--4 {
+        right: 4vw;
+        bottom: 17vh;
+    }
+
+
+    .jazz-expanded__text {
+
+        left: 30px;
+        bottom: 25px;
+
+        width: calc(100% - 60px);
+    }
+
+
+    .jazz-expanded__text h3 {
+
+        font-size: 43px;
+    }
+
+
+    .jazz-expanded__text p {
+
+        font-size: 11px;
+
+        line-height: 1.5;
+    }
+
+
+    .jazz-expanded__details {
+
+        margin-top: 15px;
+
+        gap: 18px;
+    }
+
+
+    .jazz-expanded__close {
+
+        top: 15px;
+        right: 10px;
+    }
+}
+
+
 /* =========================================================
    CONTACT
 ========================================================= */
@@ -1171,6 +1723,8 @@ a {
 .footer span:nth-child(3) {
     text-align: right;
 }
+
+
 
 
 /* =========================================================

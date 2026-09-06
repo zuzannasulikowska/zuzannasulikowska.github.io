@@ -869,3 +869,340 @@ window.addEventListener("resize", () => {
     ScrollTrigger.refresh();
 
 });
+
+const jazzTrigger = document.querySelector("#jazzTrigger");
+const jazzExpanded = document.querySelector("#jazzExpanded");
+const jazzBackground = document.querySelector(".jazz-expanded__background");
+
+const jazzMain = document.querySelector(".jazz-expanded__main-circle");
+
+const jazzCircles = document.querySelectorAll(".jazz-circle");
+
+const jazzText = document.querySelector(".jazz-expanded__text");
+
+const jazzNumber = document.querySelector(".jazz-expanded__number");
+
+const jazzClose = document.querySelector("#jazzClose");
+
+
+let jazzTimeline;
+
+
+/* =====================================================
+   OPEN
+===================================================== */
+
+function openJazz() {
+
+    /*
+     * Make the overlay exist.
+     */
+
+    jazzExpanded.style.visibility = "visible";
+    jazzExpanded.style.pointerEvents = "auto";
+
+    document.body.style.overflow = "hidden";
+
+
+    /*
+     * Reset everything before starting.
+     */
+
+    gsap.killTweensOf([
+        jazzBackground,
+        jazzMain,
+        jazzCircles,
+        jazzText,
+        jazzNumber
+    ]);
+
+
+    gsap.set(jazzBackground, {
+        opacity: 0
+    });
+
+
+    gsap.set(jazzMain, {
+        scale: 0
+    });
+
+
+    gsap.set(jazzCircles, {
+        scale: 0,
+        opacity: 0
+    });
+
+
+    gsap.set(jazzText, {
+        opacity: 0,
+        y: 40
+    });
+
+
+    gsap.set(jazzNumber, {
+        opacity: 0,
+        x: 100
+    });
+
+
+    /*
+     * Create the timeline.
+     */
+
+    jazzTimeline = gsap.timeline();
+
+
+    /* ---------------------------------------------
+       STEP 1
+
+       Everything behind the project gets dimmed.
+    --------------------------------------------- */
+
+    jazzTimeline.to(jazzBackground, {
+
+        opacity: 1,
+
+        duration: .55,
+
+        ease: "power2.out"
+
+    });
+
+
+    /* ---------------------------------------------
+       STEP 2
+
+       Main circle grows from nothing.
+
+       This is the "portal" into the project.
+    --------------------------------------------- */
+
+    jazzTimeline.to(jazzMain, {
+
+        scale: 1,
+
+        duration: .9,
+
+        ease: "expo.out"
+
+    }, "-=.2");
+
+
+    /* ---------------------------------------------
+       STEP 3
+
+       The four additional circles explode
+       outward from the center.
+    --------------------------------------------- */
+
+    jazzTimeline.to(jazzCircles, {
+
+        scale: 1,
+
+        opacity: 1,
+
+        duration: .8,
+
+        stagger: {
+
+            each: .08,
+
+            from: "center"
+
+        },
+
+        ease: "back.out(1.8)"
+
+    }, "-=.55");
+
+
+    /* ---------------------------------------------
+       STEP 4
+
+       Text arrives after the visual explosion.
+    --------------------------------------------- */
+
+    jazzTimeline.to(jazzText, {
+
+        opacity: 1,
+
+        y: 0,
+
+        duration: .7,
+
+        ease: "power3.out"
+
+    }, "-=.3");
+
+
+    /* ---------------------------------------------
+       STEP 5
+
+       Huge number appears very subtly.
+    --------------------------------------------- */
+
+    jazzTimeline.to(jazzNumber, {
+
+        opacity: 1,
+
+        x: 0,
+
+        duration: 1,
+
+        ease: "power3.out"
+
+    }, "-=.8");
+
+
+    /*
+     * Once the opening animation has finished,
+     * make the circles slowly breathe.
+     */
+
+    jazzCircles.forEach((circle, index) => {
+
+        gsap.to(circle, {
+
+            y: index % 2 === 0 ? -10 : 10,
+
+            x: index % 2 === 0 ? 6 : -6,
+
+            duration: 3 + index * .5,
+
+            repeat: -1,
+
+            yoyo: true,
+
+            ease: "sine.inOut",
+
+            delay: 1.2 + index * .15
+
+        });
+
+    });
+
+}
+
+
+/* =====================================================
+   CLOSE
+===================================================== */
+
+function closeJazz() {
+
+    gsap.killTweensOf(jazzCircles);
+
+
+    const closeTimeline = gsap.timeline({
+
+        onComplete: () => {
+
+            jazzExpanded.style.visibility = "hidden";
+
+            jazzExpanded.style.pointerEvents = "none";
+
+            document.body.style.overflow = "";
+
+        }
+
+    });
+
+
+    /*
+     * First remove the information.
+     */
+
+    closeTimeline.to(jazzText, {
+
+        opacity: 0,
+
+        y: 30,
+
+        duration: .3,
+
+        ease: "power2.in"
+
+    });
+
+
+    /*
+     * The smaller circles collapse back
+     * towards the center.
+     */
+
+    closeTimeline.to(jazzCircles, {
+
+        scale: 0,
+
+        opacity: 0,
+
+        duration: .55,
+
+        stagger: {
+
+            each: .05,
+
+            from: "edges"
+
+        },
+
+        ease: "power3.in"
+
+    }, "-=.05");
+
+
+    /*
+     * Then the main project image collapses.
+     */
+
+    closeTimeline.to(jazzMain, {
+
+        scale: 0,
+
+        duration: .55,
+
+        ease: "power3.inOut"
+
+    }, "-=.2");
+
+
+    /*
+     * Finally reveal the original page.
+     */
+
+    closeTimeline.to(jazzBackground, {
+
+        opacity: 0,
+
+        duration: .45
+
+    }, "-=.2");
+
+}
+
+
+/* =====================================================
+   EVENTS
+===================================================== */
+
+jazzTrigger.addEventListener("click", openJazz);
+
+jazzClose.addEventListener("click", closeJazz);
+
+
+/* click dark area */
+
+jazzBackground.addEventListener("click", closeJazz);
+
+
+/* ESC */
+
+document.addEventListener("keydown", (event) => {
+
+    if (event.key === "Escape") {
+
+        closeJazz();
+
+    }
+
+});
