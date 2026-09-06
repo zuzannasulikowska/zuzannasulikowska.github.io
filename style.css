@@ -13,6 +13,8 @@
     --padding: clamp(24px, 4vw, 70px);
     --axis: 68px;
 
+
+    --fs-little: 11px;
     --fs-header: 14px; /* header + navbar */
     --fs-small: 14px; /* small text around pages */
     --fs-medium: 28px;
@@ -36,9 +38,7 @@ body {
     background: var(--bg);
     color: var(--black);
     font-family:
-        "Montserrat",
-        Arial,
-        sans-serif;
+        "Montserrat";
     font-weight: 300;
     overflow-x: hidden;
 }
@@ -75,7 +75,7 @@ a {
 
 /* SCROLL ORB */
 
-.story-orb {
+.scroll-orb {
     position: fixed;
     width: 18px;
     height: 18px;
@@ -114,9 +114,10 @@ a {
 .axis-top,
 .axis-bottom {
     position: absolute;
-    left: 50%;
+    left: 25%;
+    text-align: center;
     transform: translateX(-50%);
-    font-size: 8px;
+    font-size: var(--fs-little);
 }
 
 .axis-top {
@@ -274,7 +275,7 @@ a {
 .hero-caption {
     position: absolute;
     bottom: 4%;
-    left: 4%;
+    left: 0;
     font-size: var(--fs-small);
     line-height: 1.5;
     text-transform: uppercase;

@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
    ELEMENT
 ========================================================= */
 
-const orb = document.querySelector(".story-orb");
+const orb = document.querySelector(".scroll-orb");
 
 
 /* =========================================================
