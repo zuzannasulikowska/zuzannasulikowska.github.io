@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osowa Góra — Galeria</title>
+    <link rel="stylesheet" href="test.css">
+    
+    <!-- Load GSAP Core + Flip Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
+</head>
+<body>
+
+    <!-- Main Project Section -->
+    <section class="project-section" id="project-05">
+        <div class="project-header">
+            <span class="project-number">05</span>
+            <span class="project-category">INNE</span>
+        </div>
+
+        <div class="project-content">
+            <!-- Clickable Trigger Image -->
+            <div class="project-image-container" data-gallery-trigger tabindex="0" role="button" aria-label="Otwórz galerię projektu">
+                <div class="project-image-inner" data-flip-id="main-photo">
+                    <img src="/images/osowa_panel.jpg" alt="Koncepcja murali przy placu zabaw">
+                </div>
+                <div class="image-hint">
+                    <span class="hint-dot"></span>
+                    <span>Kliknij, aby zobaczyć więcej</span>
+                </div>
+            </div>
+
+            <!-- Project Meta Info -->
+            <div class="project-info">
+                <div class="project-title-group">
+                    <span class="black-label">KONCEPCJA MURALI</span>
+                    <h2>Osowa<br>Góra</h2>
+                </div>
+                <p class="project-short-desc">
+                    Projekt rewitalizacji bloków na osiedlu Osowa Góra z motywem morskim.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fullscreen Gallery Overlay -->
+    <div class="gallery-overlay" data-gallery-overlay aria-hidden="true">
+        <!-- Close Button -->
+        <button class="gallery-close" data-gallery-close aria-label="Zamknij galerię">
+            ZAMKNIJ ✕
+        </button>
+
+        <div class="gallery-wrapper">
+            <!-- Left Column: Enlarged Main Photo + Carousel -->
+            <div class="gallery-visuals">
+                <div class="hero-target-slot" data-hero-slot></div>
+
+                <div class="carousel-container">
+                    <div class="carousel-track" data-carousel-track>
+                        <!-- Injected dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Project Description -->
+            <div class="gallery-details" data-gallery-details>
+                <span class="black-label">KONCEPCJA MURALI</span>
+                <h3>Osowa Góra</h3>
+                <div class="gallery-text-body">
+                    <p>
+                        Osiedle Osowa Góra zyskuje nową tożsamość wizualną: seria murali
+                        inspirowanych motywem morskim, zaprojektowanych z myślą o
+                        ścianach szczytowych bloków i przestrzeni wokół placu zabaw.
+                    </p>
+                    <p>
+                        Paleta kolorów nawiązuje do wody i piasku, a kompozycje skalują
+                        się od dużych form widocznych z daleka po detale odkrywane
+                        z bliska — tak, by mural żył razem z mieszkańcami przez cały rok.
+                    </p>
+                    <p>
+                        Projekt obejmuje koncepcję, dobór technologii malarskich
+                        odpornych na warunki atmosferyczne oraz plan wdrożenia
+                        etapowego, dopasowany do harmonogramu prac osiedlowych.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal for Enlarge View -->
+    <div class="lightbox" data-lightbox aria-hidden="true">
+        <button class="lightbox-close" data-lightbox-close aria-label="Zamknij">✕</button>
+        <div class="lightbox-content">
+            <img data-lightbox-img src="" alt="">
+            <p class="lightbox-caption" data-lightbox-caption></p>
+        </div>
+    </div>
+
+    <script src="test.js"></script>
+</body>
+</html>

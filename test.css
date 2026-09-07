@@ -1,0 +1,378 @@
+/* =========================================================
+   TOKENS & RESET
+========================================================= */
+:root {
+    --bg-paper: #f6f4ef;
+    --ink-dark: #141414;
+    --accent-blue: #3d5a73;
+    --overlay-bg: rgba(10, 10, 10, 0.92);
+    --font-main: "Helvetica Neue", Arial, sans-serif;
+    --padding-global: clamp(20px, 4vw, 50px);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-paper);
+    color: var(--ink-dark);
+    font-family: var(--font-main);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* =========================================================
+   MAIN SECTION
+========================================================= */
+.project-section {
+    position: relative;
+    min-height: 100vh;
+    padding: var(--padding-global);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(20, 20, 20, 0.15);
+    padding-bottom: 16px;
+}
+
+.project-number {
+    font-size: 3.5rem;
+    font-weight: 300;
+    letter-spacing: -0.05em;
+}
+
+.project-category {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+.project-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin: 40px 0;
+}
+
+@media (min-width: 900px) {
+    .project-content {
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+        gap: 60px;
+    }
+}
+
+
+
+.project-image-container {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 3 / 4;
+    cursor: pointer;
+    justify-self: center;
+}
+
+.project-image-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--accent-blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-image-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.project-image-container:hover .project-image-inner img {
+    transform: scale(1.04);
+}
+
+.image-hint {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-paper);
+    color: var(--ink-dark);
+    padding: 8px 14px;
+    font-size: 0.75rem;
+    border-radius: 2px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.hint-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ink-dark);
+}
+
+.project-image-container:hover .image-hint {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.black-label {
+    display: inline-block;
+    background: var(--ink-dark);
+    color: var(--bg-paper);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 4px 8px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.project-title-group h2 {
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 300;
+    line-height: 0.85;
+    letter-spacing: -0.05em;
+    margin-top: 15px;
+}
+
+.project-short-desc {
+    margin-top: 25px;
+    max-width: 300px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: rgba(20, 20, 20, 0.8);
+}
+
+/* =========================================================
+   OVERLAY GALLERY
+========================================================= */
+.gallery-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--overlay-bg);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--padding-global);
+    visibility: hidden;
+    opacity: 0;
+    backdrop-filter: blur(8px);
+}
+
+.gallery-close {
+    position: absolute;
+    top: 25px;
+    right: var(--padding-global);
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    z-index: 110;
+    padding: 10px;
+    transition: opacity 0.2s;
+}
+
+.gallery-close:hover {
+    opacity: 0.7;
+}
+
+.gallery-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+    max-height: 88vh;
+    overflow-y: auto;
+    pointer-events: auto; /* allows click propagation to overlay backdrop */
+}
+
+@media (min-width: 960px) {
+    .gallery-wrapper {
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        overflow-y: visible;
+    }
+}
+
+.gallery-visuals {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    min-width: 0; /* fixes flexbox/grid layout constraints */
+}
+
+.hero-target-slot {
+    width: 100%;
+    max-height: 55vh; /* Prevents overflow while keeping native aspect ratio */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Adjust inner photo wrapper inside the overview slot */
+.hero-target-slot .project-image-inner {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 55vh;
+    background: transparent;
+}
+
+/* Switches from crop/cover to contain native proportions */
+.hero-target-slot img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 55vh;
+    object-fit: contain; /* Keeps original picture proportions intact */
+    border-radius: 4px;
+}
+
+/* Horizontal Carousel Strip */
+.carousel-container {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 14px;
+    width: max-content;
+}
+
+.carousel-card {
+    width: 110px;
+    height: 140px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.carousel-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.carousel-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* Side Description Box */
+.gallery-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.gallery-details .black-label {
+    background: #ffffff;
+    color: var(--ink-dark);
+}
+
+.gallery-details h3 {
+    font-size: 2.2rem;
+    font-weight: 300;
+    line-height: 1;
+}
+
+.gallery-text-body p {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.75);
+    margin-bottom: 12px;
+}
+
+/* =========================================================
+   LIGHTBOX VIEW
+========================================================= */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0, 0, 0, 0.94);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    padding: 20px;
+}
+
+.lightbox.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 210;
+}
+
+.lightbox-content {
+    max-width: 90vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 75vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    margin-top: 15px;
+    text-align: center;
+}
