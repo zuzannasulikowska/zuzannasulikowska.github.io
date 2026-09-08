@@ -1,13 +1,16 @@
 /* =========================================================
-   TOKENS & RESET
+   STYLE SHEET: test.css
+   Aesthetic: Minimalist, Architectural, Sharp Edges, High Contrast
 ========================================================= */
+
 :root {
-    --bg-paper: #f6f4ef;
-    --ink-dark: #141414;
-    --accent-blue: #3d5a73;
-    --overlay-bg: rgba(10, 10, 10, 0.92);
-    --font-main: "Helvetica Neue", Arial, sans-serif;
-    --padding-global: clamp(20px, 4vw, 50px);
+    --bg-paper: #f4f2ed;
+    --ink-black: #111111;
+    --line-color: #111111;
+    --accent-gray: #777777;
+    --ball-color: #d1cbc1;
+    --font-sans: "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "Courier New", Courier, monospace;
 }
 
 * {
@@ -18,82 +21,135 @@
 
 body {
     background-color: var(--bg-paper);
-    color: var(--ink-dark);
-    font-family: var(--font-main);
+    color: var(--ink-black);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* Background Balls (Sketch & Contrast Accents) */
+.bg-ball {
+    position: fixed;
+    border-radius: 50%;
+    background: var(--ball-color);
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.bg-ball-1 {
+    width: 320px;
+    height: 320px;
+    top: -80px;
+    right: -60px;
+}
+
+.bg-ball-2 {
+    width: 200px;
+    height: 200px;
+    bottom: 10%;
+    left: -50px;
+}
+
+/* Main Container */
+.portfolio-container {
+    position: relative;
+    z-index: 1;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 40px 24px 100px;
+}
+
+/* Site Header */
+.site-header {
+    border-bottom: 2px solid var(--line-color);
+    padding-bottom: 20px;
+    margin-bottom: 60px;
+}
+
+.brand-tag {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.brand-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 300;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
 }
 
 /* =========================================================
-   MAIN SECTION
+   PROJECT CARD LAYOUT
 ========================================================= */
-.project-section {
-    position: relative;
-    min-height: 100vh;
-    padding: var(--padding-global);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.project-card {
+    border: 1px solid var(--line-color);
+    background: var(--bg-paper);
+    padding: 24px;
+    margin-bottom: 80px;
 }
 
-.project-header {
+.project-meta {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(20, 20, 20, 0.15);
-    padding-bottom: 16px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    border-bottom: 1px solid var(--line-color);
+    padding-bottom: 12px;
+    margin-bottom: 24px;
 }
 
-.project-number {
-    font-size: 3.5rem;
-    font-weight: 300;
-    letter-spacing: -0.05em;
-}
-
-.project-category {
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
-.project-content {
+/* Multi-photo showcase grid */
+.project-media-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 40px;
-    margin: 40px 0;
+    gap: 16px;
+    margin-bottom: 24px;
 }
 
-@media (min-width: 900px) {
-    .project-content {
-        grid-template-columns: 1.1fr 1fr;
-        align-items: center;
-        gap: 60px;
+@media (min-width: 768px) {
+    .project-media-grid {
+        grid-template-columns: 1.6fr 1fr;
     }
 }
 
-
-
-.project-image-container {
+.media-box {
     position: relative;
-    width: 100%;
-    max-width: 480px;
-    aspect-ratio: 3 / 4;
+    border: 1px solid var(--line-color);
+    background: #e2ded5;
+    overflow: hidden;
     cursor: pointer;
-    justify-self: center;
 }
 
-.project-image-inner {
+/* Maintain flexible aspect ratios while supporting any image shape */
+.hero-box {
+    aspect-ratio: 16 / 10;
+}
+
+.secondary-box {
+    aspect-ratio: 4 / 3;
+}
+
+@media (max-width: 767px) {
+    .secondary-box {
+        display: none; /* Optimized single featured view for mobile */
+    }
+}
+
+.image-wrapper {
     width: 100%;
     height: 100%;
-    border-radius: 4px;
-    overflow: hidden;
-    background: var(--accent-blue);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.project-image-inner img {
+.image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -101,262 +157,267 @@ body {
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.project-image-container:hover .project-image-inner img {
-    transform: scale(1.04);
+.media-box:hover .image-wrapper img {
+    transform: scale(1.03);
 }
 
-.image-hint {
+.sketch-tag {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--bg-paper);
-    color: var(--ink-dark);
-    padding: 8px 14px;
-    font-size: 0.75rem;
-    border-radius: 2px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    pointer-events: none;
-}
-
-.hint-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--ink-dark);
-}
-
-.project-image-container:hover .image-hint {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.black-label {
-    display: inline-block;
-    background: var(--ink-dark);
+    bottom: 12px;
+    right: 12px;
+    background: var(--ink-black);
     color: var(--bg-paper);
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
-    padding: 4px 8px;
-    text-transform: uppercase;
-    font-weight: 600;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 6px 12px;
+    letter-spacing: 0.05em;
 }
 
-.project-title-group h2 {
-    font-size: clamp(3rem, 7vw, 6.5rem);
-    font-weight: 300;
-    line-height: 0.85;
-    letter-spacing: -0.05em;
-    margin-top: 15px;
-}
-
-.project-short-desc {
-    margin-top: 25px;
-    max-width: 300px;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: rgba(20, 20, 20, 0.8);
-}
-
-/* =========================================================
-   OVERLAY GALLERY
-========================================================= */
-.gallery-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    background: var(--overlay-bg);
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: var(--padding-global);
-    visibility: hidden;
-    opacity: 0;
-    backdrop-filter: blur(8px);
-}
-
-.gallery-close {
-    position: absolute;
-    top: 25px;
-    right: var(--padding-global);
-    background: transparent;
-    border: none;
-    color: #ffffff;
-    font-size: 0.85rem;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    z-index: 110;
-    padding: 10px;
-    transition: opacity 0.2s;
-}
-
-.gallery-close:hover {
-    opacity: 0.7;
-}
-
-.gallery-wrapper {
+/* Card Body */
+.project-body {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
-    width: 100%;
-    max-width: 1200px;
-    max-height: 88vh;
-    overflow-y: auto;
-    pointer-events: auto; /* allows click propagation to overlay backdrop */
+    gap: 20px;
+    border-top: 1px solid var(--line-color);
+    padding-top: 20px;
 }
 
-@media (min-width: 960px) {
-    .gallery-wrapper {
-        grid-template-columns: 1.1fr 0.9fr;
+@media (min-width: 900px) {
+    .project-body {
+        grid-template-columns: 1.2fr 1fr 200px;
         align-items: center;
-        overflow-y: visible;
     }
 }
 
-.gallery-visuals {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    min-width: 0; /* fixes flexbox/grid layout constraints */
+.sketch-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    border: 1px solid var(--line-color);
+    padding: 2px 8px;
+    margin-bottom: 8px;
 }
 
-.hero-target-slot {
-    width: 100%;
-    max-height: 55vh; /* Prevents overflow while keeping native aspect ratio */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-/* Adjust inner photo wrapper inside the overview slot */
-.hero-target-slot .project-image-inner {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 55vh;
-    background: transparent;
-}
-
-/* Switches from crop/cover to contain native proportions */
-.hero-target-slot img {
-    width: auto;
-    height: auto;
-    max-width: 100%;
-    max-height: 55vh;
-    object-fit: contain; /* Keeps original picture proportions intact */
-    border-radius: 4px;
-}
-
-/* Horizontal Carousel Strip */
-.carousel-container {
-    width: 100%;
-    overflow-x: auto;
-    padding-bottom: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
-}
-
-.carousel-track {
-    display: flex;
-    gap: 14px;
-    width: max-content;
-}
-
-.carousel-card {
-    width: 110px;
-    height: 140px;
-    flex-shrink: 0;
-    border-radius: 4px;
-    overflow: hidden;
-    cursor: pointer;
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    transition: transform 0.25s ease, border-color 0.25s ease;
-}
-
-.carousel-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.6);
-}
-
-.carousel-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    pointer-events: none;
-}
-
-/* Side Description Box */
-.gallery-details {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.gallery-details .black-label {
-    background: #ffffff;
-    color: var(--ink-dark);
-}
-
-.gallery-details h3 {
-    font-size: 2.2rem;
+.project-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
     font-weight: 300;
     line-height: 1;
+    letter-spacing: -0.02em;
 }
 
-.gallery-text-body p {
-    font-size: 0.85rem;
-    line-height: 1.65;
-    color: rgba(255, 255, 255, 0.75);
-    margin-bottom: 12px;
+.project-summary {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #333333;
+}
+
+.btn-open-project {
+    background: transparent;
+    border: 1px solid var(--line-color);
+    padding: 14px 18px;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.2s, color 0.2s;
+}
+
+.btn-open-project:hover {
+    background: var(--ink-black);
+    color: var(--bg-paper);
 }
 
 /* =========================================================
-   LIGHTBOX VIEW
+   FULLSCREEN MODAL OVERLAY
 ========================================================= */
-.lightbox {
+.modal-overlay {
     position: fixed;
     inset: 0;
-    z-index: 200;
-    background: rgba(0, 0, 0, 0.94);
+    z-index: 100;
+    background: rgba(244, 242, 237, 0.97);
+    backdrop-filter: blur(6px);
+    overflow-y: auto;
+    padding: 30px 20px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.modal-close-btn {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 110;
+    background: var(--ink-black);
+    color: var(--bg-paper);
+    border: none;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    padding: 12px 18px;
+    cursor: pointer;
+}
+
+.modal-container {
+    max-width: 1400px;
+    margin: 60px auto 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+@media (min-width: 960px) {
+    .modal-container {
+        grid-template-columns: 1.2fr 0.8fr;
+        align-items: start;
+    }
+}
+
+/* Hero slot where main image morphs into */
+.modal-hero-target {
+    width: 100%;
+    max-height: 65vh;
+    border: 1px solid var(--line-color);
+    background: #e2ded5;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+}
+
+/* Handles ANY image orientation (portrait, landscape, square) natively */
+.modal-hero-target img {
+    width: 100%;
+    height: 100%;
+    max-height: 65vh;
+    object-fit: contain; /* Prevents awkward cropping in expanded view */
+}
+
+/* Gallery Section inside Modal */
+.gallery-section {
+    margin-top: 40px;
+}
+
+.section-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--line-color);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+}
+
+.gallery-card {
+    aspect-ratio: 1 / 1;
+    border: 1px solid var(--line-color);
+    overflow: hidden;
+    cursor: pointer;
+    background: #e2ded5;
+    position: relative;
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.gallery-card:hover img {
+    transform: scale(1.08);
+}
+
+/* Right Column Specs & Description */
+.modal-info-side {
+    border-left: 1px solid var(--line-color);
+    padding-left: 0px;
+}
+
+@media (min-width: 960px) {
+    .modal-info-side {
+        padding-left: 40px;
+        position: sticky;
+        top: 100px;
+    }
+}
+
+.modal-project-title {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    margin: 12px 0 24px;
+}
+
+.tech-specs {
+    border-top: 1px solid var(--line-color);
+    border-bottom: 1px solid var(--line-color);
+    padding: 16px 0;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.spec-item {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+
+.spec-label {
+    color: var(--accent-gray);
+}
+
+.modal-text-content p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    color: #222222;
+}
+
+/* =========================================================
+   LIGHTBOX FULLSCREEN VIEW
+========================================================= */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(10, 10, 10, 0.96);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.lightbox.is-active {
+.lightbox-overlay.is-active {
+    visibility: visible;
     opacity: 1;
-    pointer-events: auto;
 }
 
-.lightbox-close {
+.lightbox-close-btn {
     position: absolute;
-    top: 20px;
-    right: 25px;
-    background: none;
+    top: 24px;
+    right: 24px;
+    background: transparent;
     border: none;
     color: #ffffff;
-    font-size: 1.8rem;
+    font-size: 2rem;
     cursor: pointer;
-    z-index: 210;
 }
 
 .lightbox-content {
-    max-width: 90vw;
-    max-height: 85vh;
+    max-width: 92vw;
+    max-height: 88vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -364,15 +425,15 @@ body {
 
 .lightbox-content img {
     max-width: 100%;
-    max-height: 75vh;
+    max-height: 80vh;
     object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .lightbox-caption {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.85rem;
-    margin-top: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    margin-top: 16px;
     text-align: center;
 }

@@ -1,163 +1,162 @@
+/* =========================================================
+   SCRIPT FILE: test.js
+   Uses GSAP + Flip Plugin for smooth shared-element transitions.
+========================================================= */
+
 document.addEventListener("DOMContentLoaded", () => {
+    // Register GSAP Flip plugin
     gsap.registerPlugin(Flip);
 
-    // Gallery project images
-    const photos = [
-        { src: '/images/mural z humbakiem.png', alt: 'Szkic muralu z humbakiem' },
-        { src: '/images/mural z kutrem.png', alt: 'Szkic muralu z kutrem' },
-        { src: '/images/mural z łososiem.png', alt: 'Mural z motywem łososia' },
-        { src: '/images/mural z płetwalem.png', alt: 'Wizualizacja z płetwalem' },
-        { src: '/images/mural z sardynką.png', alt: 'Detal z sardynkami' },
-        { src: '/images/mural z sardynką02.png', alt: 'Koncepcja drugoplanowa' }
-    ];
+    // Dynamic photo database per project (supports portrait, landscape, square)
+    const projectGalleryData = {
+        "project-01": [
+            { src: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80", alt: "Living Space View" },
+            { src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80", alt: "Kitchen Island Detail" },
+            { src: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80", alt: "Master Bedroom Suite" },
+            { src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80", alt: "Bathroom Stone Details" },
+            { src: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80", alt: "Exterior Glass Entrance" }
+        ]
+    };
 
-    // DOM References
-    const triggerContainer = document.querySelector('[data-gallery-trigger]');
-    const animatedImageWrapper = document.querySelector('[data-flip-id="main-photo"]');
-    const heroTargetSlot = document.querySelector('[data-hero-slot]');
-    const overlay = document.querySelector('[data-gallery-overlay]');
-    const closeBtn = document.querySelector('[data-gallery-close]');
-    const carouselTrack = document.querySelector('[data-carousel-track]');
-    const galleryDetails = document.querySelector('[data-gallery-details]');
+    // DOM Elements
+    const cardHeroWrapper = document.querySelector('[data-flip-id="p1-hero"]');
+    const heroTargetSlot = document.getElementById('hero-target-slot');
+    const triggers = document.querySelectorAll('[data-gallery-trigger]');
+    
+    const modalOverlay = document.getElementById('project-modal');
+    const modalCloseBtn = document.getElementById('modal-close');
+    const modalGalleryGrid = document.getElementById('modal-gallery-grid');
 
-    // Lightbox References
-    const lightbox = document.querySelector('[data-lightbox]');
-    const lightboxImg = document.querySelector('[data-lightbox-img]');
-    const lightboxCaption = document.querySelector('[data-lightbox-caption]');
-    const lightboxClose = document.querySelector('[data-lightbox-close]');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxCloseBtn = document.getElementById('lightbox-close');
 
-    let isGalleryOpen = false;
+    let isModalOpen = false;
 
     /* =========================================================
-       1. BUILD CAROUSEL ITEMS & ATTACH CLICK TO LIGHTBOX
+       1. POPULATE MODAL GALLERY
     ========================================================= */
-    function buildCarousel() {
-        carouselTrack.innerHTML = '';
+    function populateGallery(projectId) {
+        modalGalleryGrid.innerHTML = '';
+        const photos = projectGalleryData[projectId] || [];
+
         photos.forEach((photo) => {
             const card = document.createElement('div');
-            card.className = 'carousel-card';
-            card.setAttribute('role', 'button');
-            card.setAttribute('tabindex', '0');
+            card.className = 'gallery-card';
 
             const img = document.createElement('img');
             img.src = photo.src;
             img.alt = photo.alt;
+            img.loading = 'lazy';
 
             card.appendChild(img);
 
-            // Click event to open clicked picture inside full screen Lightbox
+            // Lightbox Click Event
             card.addEventListener('click', (e) => {
                 e.stopPropagation();
                 openLightbox(photo);
             });
 
-            card.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openLightbox(photo);
-                }
-            });
-
-            carouselTrack.appendChild(card);
+            modalGalleryGrid.appendChild(card);
         });
     }
 
-    buildCarousel();
+    populateGallery("project-01");
 
     /* =========================================================
-       2. OPEN GALLERY (GSAP FLIP)
+       2. OPEN MODAL WITH GSAP FLIP
     ========================================================= */
-    function openGallery() {
-        if (isGalleryOpen) return;
-        isGalleryOpen = true;
+    function openModal() {
+        if (isModalOpen) return;
+        isModalOpen = true;
 
-        // Record initial position of main hero image
-        const state = Flip.getState(animatedImageWrapper);
+        // Step 1: Capture initial position of hero image wrapper
+        const state = Flip.getState(cardHeroWrapper);
 
-        // Append hero image wrapper inside the overlay target slot
-        heroTargetSlot.appendChild(animatedImageWrapper);
+        // Step 2: Reparent element to target container in modal
+        heroTargetSlot.appendChild(cardHeroWrapper);
 
-        // Set initial overlay UI states
-        gsap.set(overlay, { visibility: 'visible', opacity: 0 });
-        gsap.set(galleryDetails, { opacity: 0, y: 20 });
-        gsap.set('.carousel-card', { opacity: 0, y: 15 });
-        gsap.set(closeBtn, { opacity: 0 });
+        // Step 3: Set initial visibility
+        gsap.set(modalOverlay, { visibility: 'visible', opacity: 0 });
+        
+        const galleryCards = modalGalleryGrid.querySelectorAll('.gallery-card');
+        gsap.set(galleryCards, { opacity: 0, y: 20 });
+        gsap.set('.modal-info-side', { opacity: 0, x: 20 });
 
         document.body.style.overflow = 'hidden';
 
-        // Animate overlay background and components as one synchronized timeline
+        // Step 4: Construct smooth entry timeline
         const tl = gsap.timeline();
 
-        tl.to(overlay, {
+        tl.to(modalOverlay, {
             opacity: 1,
             duration: 0.35,
             ease: "power2.out"
         })
+        // Shared element transform: Morphs hero photo seamlessly into modal slot
         .add(
             Flip.from(state, {
-                duration: 0.7,
+                targets: [cardHeroWrapper],
+                duration: 0.65,
                 ease: "power3.inOut",
-                absolute: true,
-                scale: true,
-                nested: true
+                scale: true
             }),
             "-=0.25"
         )
-        .to(galleryDetails, {
+        .to('.modal-info-side', {
             opacity: 1,
-            y: 0,
-            duration: 0.45,
+            x: 0,
+            duration: 0.4,
             ease: "power2.out"
-        }, "-=0.35")
-        .to('.carousel-card', {
+        }, "-=0.3")
+        .to(galleryCards, {
             opacity: 1,
             y: 0,
             duration: 0.35,
-            stagger: 0.04,
-            ease: "power2.out"
-        }, "-=0.35")
-        .to(closeBtn, {
-            opacity: 1,
-            duration: 0.25
-        }, "-=0.2");
+            stagger: 0.05,
+            ease: "power2.out",
+            clearProps: "transform"
+        }, "-=0.3");
     }
 
     /* =========================================================
-       3. CLOSE GALLERY
+       3. CLOSE MODAL WITH GSAP FLIP
     ========================================================= */
-    function closeGallery() {
-        if (!isGalleryOpen) return;
+    function closeModal() {
+        if (!isModalOpen) return;
 
-        // Record current position of hero image inside overlay
-        const state = Flip.getState(animatedImageWrapper);
+        // Capture current state inside modal
+        const state = Flip.getState(cardHeroWrapper);
 
-        // Move main image DOM node back to main page project section
-        triggerContainer.appendChild(animatedImageWrapper);
+        // Reparent back to original project card slot
+        const originalParent = document.querySelector('.hero-box');
+        originalParent.appendChild(cardHeroWrapper);
+
+        const galleryCards = modalGalleryGrid.querySelectorAll('.gallery-card');
 
         const tl = gsap.timeline({
             onComplete: () => {
-                gsap.set(overlay, { visibility: 'hidden' });
+                gsap.set(modalOverlay, { visibility: 'hidden' });
                 document.body.style.overflow = '';
-                isGalleryOpen = false;
+                isModalOpen = false;
             }
         });
 
-        tl.to([galleryDetails, '.carousel-card', closeBtn], {
+        tl.to([galleryCards, '.modal-info-side'], {
             opacity: 0,
             duration: 0.2,
             ease: "power2.in"
         })
         .add(
             Flip.from(state, {
+                targets: [cardHeroWrapper],
                 duration: 0.55,
                 ease: "power3.inOut",
-                absolute: true,
-                scale: true,
-                nested: true
+                scale: true
             })
         )
-        .to(overlay, {
+        .to(modalOverlay, {
             opacity: 0,
             duration: 0.25,
             ease: "power2.inOut"
@@ -183,41 +182,29 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =========================================================
        5. EVENT LISTENERS
     ========================================================= */
-    // Open overview on main image click
-    triggerContainer.addEventListener('click', openGallery);
-    triggerContainer.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            openGallery();
-        }
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', openModal);
     });
 
-    // Close button click handler
-    closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeGallery();
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    // Close modal when clicking outside content area
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeModal();
     });
 
-    // Close when clicking dimmed backdrop outside the white details box
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) {
-            closeGallery();
-        }
-    });
-
-    // Lightbox close events
-    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxCloseBtn.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', (e) => {
         if (e.target === lightbox) closeLightbox();
     });
 
-    // Escape key handling
+    // Keyboard navigation (Escape key)
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             if (lightbox.classList.contains('is-active')) {
                 closeLightbox();
-            } else if (isGalleryOpen) {
-                closeGallery();
+            } else if (isModalOpen) {
+                closeModal();
             }
         }
     });
