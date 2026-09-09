@@ -44,9 +44,9 @@ function renderModalContent(data) {
     if (data.heroImage && data.heroImage.src) {
         heroTargetSlot.innerHTML = `
             <div class="hero-image-wrapper" 
-                 data-full-src="${data.heroImage.src}" 
-                 data-caption="${data.heroImage.caption || ''}" 
-                 style="cursor: pointer;">
+                    data-full-src="${data.heroImage.src}" 
+                    data-caption="${data.heroImage.caption || ''}" 
+                    style="cursor: pointer;">
                 <img src="${data.heroImage.src}" alt="${data.heroImage.caption || data.title}">
             </div>
         `;
@@ -164,3 +164,38 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+const galleryGrid = document.getElementById('modal-gallery-grid');
+const galleryWrapper = document.querySelector('.gallery-slider-wrapper');
+const prevBtn = document.getElementById('gallery-prev');
+const nextBtn = document.getElementById('gallery-next');
+
+/* Check if the gallery actually overflows */
+function checkGalleryOverflow() {
+    if (!galleryGrid || !galleryWrapper) return;
+    
+    const hasOverflow = galleryGrid.scrollWidth > galleryGrid.clientWidth;
+    galleryWrapper.classList.toggle('has-overflow', hasOverflow);
+}
+
+/* Scroll handler for buttons */
+prevBtn.addEventListener('click', () => {
+    galleryGrid.scrollBy({ left: -200, behavior: 'smooth' });
+});
+
+nextBtn.addEventListener('click', () => {
+    galleryGrid.scrollBy({ left: 200, behavior: 'smooth' });
+});
+
+/* Observe size changes to update arrow visibility dynamically */
+const resizeObserver = new ResizeObserver(() => checkGalleryOverflow());
+if (galleryGrid) {
+    resizeObserver.observe(galleryGrid);
+}
+
+/* Call check after rendering new images inside renderModalContent() */
+const originalRenderModal = renderModalContent;
+renderModalContent = function(data) {
+    originalRenderModal(data);
+    setTimeout(checkGalleryOverflow, 50); // Small delay allows DOM to calculate image widths
+};

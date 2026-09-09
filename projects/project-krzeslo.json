@@ -1,0 +1,32 @@
+{
+    "id": "project-krzeslo",
+    "badge": "Autorskie krzesło",
+    "title": "ECO CHAIR",
+    "heroImage": {
+        "src": "images/krzeslo-pod-katem.webp",
+        "caption": "Reder muralu"
+    },
+    "specs": [
+        { "label": "ROK", "val": "2069" },
+        { "label": "KATEGORIA", "val": "Mebel" },
+        { "label": "ZAKRES", "val": "Struganie sklejki & przeginanie druta" }
+    ],
+    "description": [
+        "Tutaj musimy wymyślić co byś chciała żeby było napisane.",
+        "Gdybyś się martwiła to te wyżej wypisane specyfikacje też mogą być jakie tylko chcesz. Więc nie martw się i wymyślaj skarbie."
+    ],
+    "gallery": [
+        {
+        "src": "images/krzeslo-od-przodu.webp",
+        "caption": "Mural od ulicy wielorybiej."
+        },
+        {
+        "src": "images/krzeslo-od-boku.webp",
+        "caption": "Mureal od ulicy kutrowej."
+        },
+        {
+        "src": "images/krzeslo-od-tylu.webp",
+        "caption": "Mural od ulicy łososiowej."
+        }
+    ]
+}

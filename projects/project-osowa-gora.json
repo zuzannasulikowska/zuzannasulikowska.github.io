@@ -1,45 +1,45 @@
 {
-  "id": "project-osowa-gora",
-  "badge": "BYDGOSZCZ, PL",
-  "title": "KONCEPCJA MURALI OSOWA GÓRA",
-  "heroImage": {
-    "src": "images/murale_glowne.jpg",
-    "caption": "Reder muralu"
-  },
-  "specs": [
-    { "label": "LOKALIZACJA", "val": "Bydgoszcz, Osowa Góra" },
-    { "label": "ROK", "val": "2026" },
-    { "label": "KATEGORIA", "val": "Sztuka Uliczna / Mural" },
-    { "label": "ZAKRES", "val": "Koncepcja graficzna & Projekt" }
-  ],
-  "description": [
-    "Koncepcja murali dla osiedla Osowa Góra opiera się na harmonijnym połączeniu geometrii z motywami organicznymi. Projekt ma na celu ożywienie wielkopłytowej architektury.",
-    "Do stworzenia kompozycji użyto stonowanej palety barw nawiązującej do okolicznych terenów zielonych oraz naturalnego światła."
-  ],
-  "gallery": [
-    {
-      "src": "images/mural z humbakiem.png",
-      "caption": "Mural od ulicy wielorybiej."
+    "id": "project-osowa-gora",
+    "badge": "BYDGOSZCZ, PL",
+    "title": "KONCEPCJA MURALI OSOWA GÓRA",
+    "heroImage": {
+        "src": "images/mural-sardynki-irl.webp",
+        "caption": "Reder muralu"
     },
-    {
-      "src": "images/mural z kutrem.png",
-      "caption": "Mureal od ulicy kutrowej."
-    },
-    {
-      "src": "images/mural z łososiem.png",
-      "caption": "Mural od ulicy łososiowej."
-    },
-    {
-      "src": "images/mural z płetwalem.png",
-      "caption": "Mural od ulicy wielorybiej."
-    },
-    {
-      "src": "images/mural z sardynką.png",
-      "caption": "Mural od ulicy sardynkowej."
-    },
+    "specs": [
+        { "label": "LOKALIZACJA", "val": "Bydgoszcz, Osowa Góra" },
+        { "label": "ROK", "val": "2026" },
+        { "label": "KATEGORIA", "val": "Sztuka Uliczna / Mural" },
+        { "label": "ZAKRES", "val": "Koncepcja graficzna & Projekt" }
+    ],
+    "description": [
+        "Koncepcja murali dla osiedla Osowa Góra opiera się na harmonijnym połączeniu geometrii z motywami organicznymi. Projekt ma na celu ożywienie wielkopłytowej architektury.",
+        "Do stworzenia kompozycji użyto stonowanej palety barw nawiązującej do okolicznych terenów zielonych oraz naturalnego światła."
+    ],
+    "gallery": [
         {
-      "src": "images/mural z sardynką02.png",
-      "caption": "Mural od ulicy sardynkowej - wersja 2."
-    }
-  ]
+        "src": "images/mural-z-humbakiem.webp",
+        "caption": "Mural od ulicy wielorybiej."
+        },
+        {
+        "src": "images/mural-z-kutrem.webp",
+        "caption": "Mureal od ulicy kutrowej."
+        },
+        {
+        "src": "images/mural-z-łososiem.webp",
+        "caption": "Mural od ulicy łososiowej."
+        },
+        {
+        "src": "images/mural-z-płetwalem.webp",
+        "caption": "Mural od ulicy wielorybiej."
+        },
+        {
+        "src": "images/mural-z-sardynką.webp",
+        "caption": "Mural od ulicy sardynkowej."
+        },
+            {
+        "src": "images/mural-z-sardynką02.webp",
+        "caption": "Mural od ulicy sardynkowej - wersja 2."
+        }
+    ]
 }
