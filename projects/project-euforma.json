@@ -1,0 +1,33 @@
+{
+    "id": "project-euforma",
+    "badge": "Projekt salonu meblowego",
+    "title": "Euforma",
+    "heroImage": {
+        "src": "images/euforma-logo.webp",
+        "caption": "Lobby z logiem na ścianie."
+    },
+    "specs": [
+        { "label": "Meble?", "val": "Euforma." },
+        { "label": "Krzesła?", "val": "Euforma." },
+        { "label": "Stoliki i kanapy?", "val": "Eufroma." },
+        { "label": "Hotel?", "val": "Trivago!"}
+    ],
+    "description": [
+        "Zrobiła takie ładne renderki wymyślonego salonu meblowego!!!",
+        "Patrzcie i podziwiajcie śmiertelnicy. ☠️"
+    ],
+    "gallery": [
+        {
+        "src": "images/euforma-biala-sciana.webp",
+        "caption": "Strefa relaksu."
+        },
+        {
+        "src": "images/euforma-pilary.webp",
+        "caption": "Strefa jadalniana."
+        },
+        {
+        "src": "images/euforma-krzesla.webp",
+        "caption": "Krzestła na ściane w formie dekoracji."
+        }
+    ]
+}

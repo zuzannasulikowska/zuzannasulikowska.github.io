@@ -19,9 +19,9 @@
     --axis: 68px;
 
     /* Font sizes */
-    --fs-little: 11px;
-    --fs-header: 14px;
-    --fs-small: 14px;
+    --fs-little: 12px;
+    --fs-header: 15px;
+    --fs-small: 15px;
     --fs-medium: 20px;
     --fs-big: 28px;
     --fs-huge: 80px;
@@ -35,9 +35,9 @@
     @media (max-width: 900px) {
         --axis: 30px;
 
-        --fs-little: 10px;
-        --fs-header: 12px;
-        --fs-small: 12px;
+        --fs-little: 11px;
+        --fs-header: 13px;
+        --fs-small: 13px;
         --fs-medium: 16px;
         --fs-big: 20px;
         --fs-huge: 40px;
@@ -168,11 +168,67 @@ a {
 }
 
 .axis-top {
-    top: 24px;
+    top: 15px;
 }
 
 .axis-bottom {
-    bottom: 24px;
+    bottom: 15px;
+}
+
+.cross-border {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        right: 0;
+        bottom: 20px;
+        left: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 20px;
+        bottom: 0;
+        left: 20px;
+        border-right: 1px solid var(--line);
+        border-left: 1px solid var(--line);
+        pointer-events: none;
+        z-index: 2;
+    }
+}
+
+.corners-border {
+    position: relative;
+    line-height: 0;
+    
+    &::after {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        pointer-events: none;
+        
+        --l: 20px; /* długość boku rogu */
+        --t: 1px; /* grubość ramki */
+        --c: var(--line); /* kolor ramki */
+        
+        background:
+        linear-gradient(var(--c) 0 0) top left / var(--l) var(--t) no-repeat,
+        linear-gradient(var(--c) 0 0) top left / var(--t) var(--l) no-repeat,
+        linear-gradient(var(--c) 0 0) top right / var(--l) var(--t) no-repeat,
+        linear-gradient(var(--c) 0 0) top right / var(--t) var(--l) no-repeat,
+        linear-gradient(var(--c) 0 0) bottom left / var(--l) var(--t) no-repeat,
+        linear-gradient(var(--c) 0 0) bottom left / var(--t) var(--l) no-repeat,
+        linear-gradient(var(--c) 0 0) bottom right / var(--l) var(--t) no-repeat,
+        linear-gradient(var(--c) 0 0) bottom right / var(--t) var(--l) no-repeat;
+    }
 }
 
 /* ==========================================================================
@@ -192,7 +248,6 @@ a {
     font-size: var(--fs-header);
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    mix-blend-mode: multiply;
 }
 
 .header-name {
@@ -376,9 +431,93 @@ a {
         height: 115px;
     }
 }
+/* ==========================================================================
+    6. ABOUT SECTION
+   ========================================================================== */
+.about {
+    min-height: 75vh;
+    padding: 150px var(--padding) 100px calc(var(--padding) + var(--axis));
+    display: grid;
+    align-items: center;
+    border-top: 1px solid var(--line);
+
+    h2 {
+        margin-top: 40px;
+        font-size: var(--fs-modal-title);
+        line-height: .82;
+        letter-spacing: -.075em;
+        font-weight: 300;
+    }
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+        gap: 70px;
+        padding: 120px 25px 130px calc(25px + var(--axis));
+    }
+}
+
+.about-layout {
+    display: grid;
+    grid-template-columns: 48% 52%;
+    align-items: center;
+    gap: 5vw;
+
+    @media (max-width: 1000px) {
+        grid-template-columns: 35% 65%;
+    }
+
+    @media (max-width: 700px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.about-image {
+    display: flex;
+    justify-content: center;
+}
+
+.image-portrait {
+    width: min(35vw, 480px);
+    aspect-ratio: 1;
+    line-height: 0;
+    padding: 10px;
+
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.portrait-fallback {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--cream);
+    font-size: var(--fs-project-title);
+    letter-spacing: -.1em;
+}
+
+.about-text {
+    max-width: 650px;
+
+    p {
+        max-width: 430px;
+        margin-top: 45px;
+        font-size: var(--fs-medium);
+        line-height: 1.75;
+    }
+
+    p + p {
+        margin-top: 20px;
+    }
+}
+
 
 /* ==========================================================================
-    6. PROJECTS SECTION
+    7. PROJECTS SECTION
    ========================================================================== */
 .projects-intro {
     min-height: 90vh;
@@ -441,32 +580,6 @@ a {
     overflow: hidden;
     cursor: pointer;
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: 20px;
-        right: 0;
-        bottom: 20px;
-        left: 0;
-        border-top: 1px solid var(--line);
-        border-bottom: 1px solid var(--line);
-        pointer-events: none;
-        z-index: 2;
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 20px;
-        bottom: 0;
-        left: 20px;
-        border-right: 1px solid var(--line);
-        border-left: 1px solid var(--line);
-        pointer-events: none;
-        z-index: 2;
-    }
-
     img {
         width: 100%;
         height: 100%;
@@ -474,7 +587,7 @@ a {
         transition: transform 0.4s ease-out;
 
         &:hover {
-            transform: scale(1.025);
+            transform: scale(1.02);
         }
     }
 }
@@ -563,7 +676,7 @@ a {
 }
 
 /* ==========================================================================
-    7. MODALS & OVERLAYS
+    8. MODALS & OVERLAYS
    ========================================================================== */
 .modal-overlay {
     position: fixed;
@@ -841,7 +954,7 @@ a {
 }
 
 /* ==========================================================================
-    8. CONTACT & FOOTER
+    9. CONTACT & FOOTER
    ========================================================================== */
 .contact {
     min-height: 100vh;
@@ -870,6 +983,7 @@ a {
     flex-direction: column;
     gap: 10px;
     font-size: var(--fs-small);
+    font-weight: 300;
 
     a {
         width: max-content;
@@ -885,6 +999,7 @@ a {
     border-top: 1px solid var(--line);
     font-size: var(--fs-little);
     text-transform: uppercase;
+    font-weight: 300;
 
     span:nth-child(2) {
         text-align: center;
@@ -925,7 +1040,7 @@ a {
 }
 
 /* ==========================================================================
-    9. ACCESSIBILITY & PREFERENCES
+    10. ACCESSIBILITY & PREFERENCES
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
     *,

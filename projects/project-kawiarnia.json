@@ -1,0 +1,32 @@
+{
+    "id": "project-kawiarnia",
+    "badge": "Projekt designu kawiarni",
+    "title": "Moss Café",
+    "heroImage": {
+        "src": "images/kawiarnia-lewa-strona.webp",
+        "caption": "Lewa strona kawiarni."
+    },
+    "specs": [
+        { "label": "Cyberpunk?", "val": "2077" },
+        { "label": "KATEGORIA", "val": "kawiarnia?" },
+        { "label": "Cock", "val": "and Ball torturez" }
+    ],
+    "description": [
+        "Okręt nasz wpłynął w mgłę i fregaty dwie,  Popłynęły naszym kursem by nie zgubić się.  Potem szkwał wypchnął nas poza mleczny pas  I nikt wtedy nie przypuszczał,  że fregaty śmierć nam niosą.",
+        "Ciepła krew poleje się strugami,   Wygra ten, kto utrzyma ship.    W huku dział ktoś przykryje się falami, Jak da Bóg, ocalimy bryg."
+    ],
+    "gallery": [
+        {
+        "src": "images/kawiarnia-prawa-strona.webp",
+        "caption": "Prawa strona kawiarni."
+        },
+        {
+        "src": "images/kawiarnia-uklad.webp",
+        "caption": "Układ kawiarni."
+        },
+        {
+        "src": "images/kawiarnia-plansza.webp",
+        "caption": "Plansza projektu Moss Café."
+        }
+    ]
+}
