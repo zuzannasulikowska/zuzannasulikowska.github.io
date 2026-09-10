@@ -520,7 +520,7 @@ a {
     7. PROJECTS SECTION
    ========================================================================== */
 .projects-intro {
-    min-height: 90vh;
+    min-height: 75vh;
     padding: 150px var(--padding) 100px calc(var(--padding) + var(--axis));
     align-items: center;
     border-top: 1px solid var(--line);
@@ -540,7 +540,7 @@ a {
 
 .project {
     position: relative;
-    min-height: 125vh;
+    min-height: 100vh;
     padding: 100px var(--padding) 180px calc(var(--padding) + var(--axis));
     border-top: 1px solid var(--line);
     overflow: hidden;
@@ -957,7 +957,7 @@ a {
     9. CONTACT & FOOTER
    ========================================================================== */
 .contact {
-    min-height: 100vh;
+    min-height: 90vh;
     padding: 150px var(--padding) 70px calc(var(--padding) + var(--axis));
     border-top: 1px solid var(--line);
     overflow: hidden;
