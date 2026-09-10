@@ -1,0 +1,48 @@
+{
+    "id": "project-wokol-dywanu",
+    "badge": "Autorskie mieszkanie",
+    "title": "Wokół dywanu",
+    "heroImage": {
+        "src": "images/wokol-dywanu-salon-kuchnia.webp",
+        "caption": "Krzesło pod kątem"
+    },
+    "specs": [
+        { "label": "ROK", "val": "2069" },
+        { "label": "KATEGORIA", "val": "Mebel" },
+        { "label": "ZAKRES", "val": "Struganie sklejki & przeginanie druta" }
+    ],
+    "description": [
+        "Tutaj musimy wymyślić co byś chciała żeby było napisane.",
+        "Gdybyś się martwiła to te wyżej wypisane specyfikacje też mogą być jakie tylko chcesz. Więc nie martw się i wymyślaj skarbie."
+    ],
+    "gallery": [
+        {
+        "src": "images/wokol-dywanu-korytarz.webp",
+        "caption": "Krzesło od przodu."
+        },
+        {
+        "src": "images/wokol-dywanu-kuchnia.webp",
+        "caption": "Krzesło od boku."
+        },
+        {
+        "src": "images/wokol-dywanu-lazienka-prysznic.webp",
+        "caption": "Krzesło od tyłu."
+        },
+        {
+        "src": "images/wokol-dywanu-lazienka-toaleta.webp",
+        "caption": "Krzesło od tyłu."
+        },
+        {
+        "src": "images/wokol-dywanu-salon-telewizor.webp",
+        "caption": "Krzesło od tyłu."
+        },
+        {
+        "src": "images/wokol-dywanu-sypialnia.webp",
+        "caption": "Krzesło od tyłu."
+        },
+        {
+        "src": "images/wokol-dywanu-taras.webp",
+        "caption": "Krzesło od tyłu."
+        }
+    ]
+}

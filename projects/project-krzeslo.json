@@ -4,7 +4,7 @@
     "title": "ECO CHAIR",
     "heroImage": {
         "src": "images/krzeslo-pod-katem.webp",
-        "caption": "Reder muralu"
+        "caption": "Krzesło pod kątem"
     },
     "specs": [
         { "label": "ROK", "val": "2069" },
@@ -18,15 +18,15 @@
     "gallery": [
         {
         "src": "images/krzeslo-od-przodu.webp",
-        "caption": "Mural od ulicy wielorybiej."
+        "caption": "Krzesło od przodu."
         },
         {
         "src": "images/krzeslo-od-boku.webp",
-        "caption": "Mureal od ulicy kutrowej."
+        "caption": "Krzesło od boku."
         },
         {
         "src": "images/krzeslo-od-tylu.webp",
-        "caption": "Mural od ulicy łososiowej."
+        "caption": "Krzesło od tyłu."
         }
     ]
 }
