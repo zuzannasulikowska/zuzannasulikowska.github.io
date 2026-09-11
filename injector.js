@@ -14,6 +14,15 @@ const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxCaption = document.getElementById('lightbox-caption');
 const lightboxCloseBtn = document.getElementById('lightbox-close');
+const lightboxPrevBtn = document.getElementById('lightbox-prev');
+const lightboxNextBtn = document.getElementById('lightbox-next');
+const lightboxSlide = document.getElementById('lightbox-slide');
+
+let isLightboxAnimating = false;
+const LIGHTBOX_ANIM_MS = 280; // musi pasować do czasu transition w CSS
+
+let currentProjectImages = [];
+let currentImageIndex = 0;
 
 // 1. ŁADOWANIE DANYCH Z JSON
 async function loadProjectData(projectId) {
@@ -34,19 +43,21 @@ async function loadProjectData(projectId) {
 
 // 2. RENDEROWANIE ZAWARTOŚCI MODALA
 function renderModalContent(data) {
-    // Kategoria / Lokalizacja (Badge)
     badgeSlot.textContent = data.badge || '';
-
-    // Tytuł
     modalTitle.textContent = data.title || '';
 
-    // Główne zdjęcie (Hero Image) z obsługą pod powiększenie w Lightboxie
+    // Resetujemy listę zdjęć na potrzeby nawigacji w lightboxie
+    currentProjectImages = [];
+
+    // Główne zdjęcie (Hero Image) — indeks 0 na liście
     if (data.heroImage && data.heroImage.src) {
+        currentProjectImages.push({
+            src: data.heroImage.src,
+            caption: data.heroImage.caption || ''
+        });
+
         heroTargetSlot.innerHTML = `
-            <div class="hero-image-wrapper" 
-                    data-full-src="${data.heroImage.src}" 
-                    data-caption="${data.heroImage.caption || ''}" 
-                    style="cursor: pointer;">
+            <div class="hero-image-wrapper" data-index="0" style="cursor: pointer;">
                 <img src="${data.heroImage.src}" alt="${data.heroImage.caption || data.title}">
             </div>
         `;
@@ -69,25 +80,96 @@ function renderModalContent(data) {
         .map(paragraph => `<p>${paragraph}</p>`)
         .join('');
 
-    // Galeria miniaturowa
+    // Galeria miniaturowa — każde zdjęcie dostaje kolejny indeks (offset o hero, jeśli istnieje)
+    const heroOffset = currentProjectImages.length; // 0 albo 1
     modalGalleryGrid.innerHTML = (data.gallery || [])
-        .map(item => `
-            <div class="gallery-item" data-full-src="${item.src}" data-caption="${item.caption || ''}">
-                <img src="${item.src}" alt="${item.caption || ''}" loading="lazy">
-            </div>
-        `)
+        .map((item, i) => {
+            currentProjectImages.push({
+                src: item.src,
+                caption: item.caption || ''
+            });
+            return `
+                <div class="gallery-item" data-index="${heroOffset + i}">
+                    <img src="${item.src}" alt="${item.caption || ''}" loading="lazy">
+                </div>
+            `;
+        })
         .join('');
 }
 
 // 3. UNIWERSALNE FUNKCJE OTWIERANIA / ZAMYKANIA
 
 // Otwieranie dowolnego zdjęcia w Lightboxie
-function openLightbox(src, caption) {
-    if (!src) return;
-    lightboxImg.src = src;
-    lightboxCaption.textContent = caption || '';
+function openLightbox(index) {
+    if (!currentProjectImages.length) return;
+
+    currentImageIndex = ((index % currentProjectImages.length) + currentProjectImages.length) % currentProjectImages.length;
+    updateLightboxImage();
+
+    lightbox.classList.toggle('has-multiple', currentProjectImages.length > 1);
     lightbox.setAttribute('aria-hidden', 'false');
     lightbox.classList.add('is-open');
+}
+
+// Update LightBoxa 
+function updateLightboxImage(direction = null) {
+    const current = currentProjectImages[currentImageIndex];
+    if (!current) return;
+
+    // Pierwsze otwarcie lightboxa - bez animacji przesuwania
+    if (!direction) {
+        lightboxImg.src = current.src;
+        lightboxCaption.textContent = current.caption || '';
+        return;
+    }
+
+    if (isLightboxAnimating) return;
+    isLightboxAnimating = true;
+
+    const exitClass = direction === 'next' ? 'lightbox-exit-next' : 'lightbox-exit-prev';
+    const enterClass = direction === 'next' ? 'lightbox-enter-from-next' : 'lightbox-enter-from-prev';
+
+    // 1. Animuj obecne zdjęcie "na wyjście"
+    lightboxSlide.classList.add(exitClass);
+
+    setTimeout(() => {
+        // 2. Podmień zawartość, gdy stare zdjęcie jest już niewidoczne
+        lightboxImg.src = current.src;
+        lightboxCaption.textContent = current.caption || '';
+
+        // 3. Ustaw nowe zdjęcie po przeciwnej stronie, bez animacji (natychmiastowy skok)
+        lightboxSlide.classList.remove(exitClass);
+        lightboxSlide.classList.add('lightbox-no-transition', enterClass);
+
+        // wymuszenie przeliczenia layoutu, żeby przeglądarka "zauważyła" pozycję startową
+        void lightboxSlide.offsetWidth;
+
+        // 4. W kolejnej klatce włącz animację i wjedź do pozycji docelowej
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                lightboxSlide.classList.remove('lightbox-no-transition', enterClass);
+            });
+        });
+
+        setTimeout(() => {
+            isLightboxAnimating = false;
+        }, LIGHTBOX_ANIM_MS);
+
+    }, LIGHTBOX_ANIM_MS);
+}
+
+// Następne zdjęcie
+function showNextImage() {
+    if (currentProjectImages.length < 2 || isLightboxAnimating) return;
+    currentImageIndex = (currentImageIndex + 1) % currentProjectImages.length;
+    updateLightboxImage('next');
+}
+
+// Poprednie zdjęcie
+function showPrevImage() {
+    if (currentProjectImages.length < 2 || isLightboxAnimating) return;
+    currentImageIndex = (currentImageIndex - 1 + currentProjectImages.length) % currentProjectImages.length;
+    updateLightboxImage('prev');
 }
 
 // Zamykanie Lightboxa
@@ -132,20 +214,21 @@ modalCloseBtn.addEventListener('click', closeModal);
 heroTargetSlot.addEventListener('click', (e) => {
     const wrapper = e.target.closest('.hero-image-wrapper');
     if (!wrapper) return;
-
-    openLightbox(wrapper.dataset.fullSrc, wrapper.dataset.caption);
+    openLightbox(parseInt(wrapper.dataset.index, 10));
 });
 
 // Powiększanie zdjęć z siatki galerii w Lightboxie
 modalGalleryGrid.addEventListener('click', (e) => {
     const item = e.target.closest('.gallery-item');
     if (!item) return;
-
-    openLightbox(item.dataset.fullSrc, item.dataset.caption);
+    openLightbox(parseInt(item.dataset.index, 10));
 });
 
 // Zamykanie Lightboxa przyciskiem
 lightboxCloseBtn.addEventListener('click', closeLightbox);
+// Strzałki next/prev image
+lightboxPrevBtn.addEventListener('click', () => showPrevImage());
+lightboxNextBtn.addEventListener('click', () => showNextImage());
 
 // Zamykanie Lightboxa po kliknięciu w tło
 lightbox.addEventListener('click', (e) => {

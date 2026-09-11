@@ -306,10 +306,14 @@
     <!-- Lightbox modal (fullscreen picture) -->
     <div class="lightbox-overlay" id="lightbox" aria-hidden="true">
         <button class="lightbox-close-btn" id="lightbox-close" aria-label="Close Fullscreen View"></button>
+        <button class="lightbox-nav-btn lightbox-prev" id="lightbox-prev" aria-label="Poprzednie zdjęcie">←</button>
         <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="Powiększone zdjęcie z galerii">
-            <p id="lightbox-caption" class="lightbox-caption"></p>
+            <div class="lightbox-slide" id="lightbox-slide">
+                <img id="lightbox-img" src="" alt="Powiększone zdjęcie z galerii">
+                <p id="lightbox-caption" class="lightbox-caption"></p>
+            </div>
         </div>
+        <button class="lightbox-nav-btn lightbox-next" id="lightbox-next" aria-label="Następne zdjęcie">→</button>
     </div>
 
     <footer class="footer">
