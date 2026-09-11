@@ -635,6 +635,28 @@ a {
     left: 57%;
 }
 
+@media (max-width: 1400px) {
+    .project-image-left {
+        width: min(50vw, 44%, 55vh, 480px);
+        right: 52%;
+    }
+
+    .project-image-right {
+        width: min(50vw, 44%, 55vh, 480px);
+        left: 52%;
+
+    }
+    .project-title-left {
+        right: 52%;
+    }
+
+    .project-title-right {
+        left: 52%;
+    }
+    
+}
+
+
 @media (max-width: 900px) {
     .projects-intro {
         min-height: auto;
@@ -666,6 +688,7 @@ a {
         right: auto;
         width: 100%;
         max-width: 100%;
+        transform: none;
     }
 
     .project-title-left,
