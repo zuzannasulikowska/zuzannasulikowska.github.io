@@ -301,7 +301,7 @@ a {
    ========================================================================== */
 .hero {
     position: relative;
-    min-height: 100vh;
+    height: 100vh;
     padding: 130px var(--padding) 70px calc(var(--padding) + var(--axis));
     overflow: hidden;
 
