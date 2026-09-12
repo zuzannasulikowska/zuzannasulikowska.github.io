@@ -1069,7 +1069,7 @@ a {
     9. CONTACT & FOOTER
    ========================================================================== */
 .contact {
-    min-height: 90vh;
+    height: 90vh;
     padding: 150px var(--padding) 70px calc(var(--padding) + var(--axis));
     border-top: 1px solid var(--line);
     overflow: hidden;
@@ -1124,8 +1124,8 @@ a {
 
 @media (max-width: 900px) {
     .contact {
-        min-height: 50vh;
-        padding: 100px 25px 80px calc(25px + var(--axis));
+        height: 70vh;
+        padding: 70px 25px 80px calc(25px + var(--axis));
     }
 
     .contact-layout {
@@ -1161,4 +1161,13 @@ a {
         animation-duration: 0.01ms !important;
         transition-duration: 0.01ms !important;
     }
+}
+
+/* tests */
+
+.project.background {
+    background-image: url('images/to_do_strony.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
