@@ -156,6 +156,7 @@ a {
         width: 50%;
         height: 100%;
         background: var(--bg);
+        z-index: 2;
     }
 }
 
@@ -442,6 +443,20 @@ a {
         height: 115px;
     }
 }
+
+@media (max-height: 800px) {
+    .hero {
+        height: auto;
+        min-height: 100vh;
+        padding-top: 110px;
+        padding-bottom: 50px;
+    }
+
+    .hero-grid {
+        height: auto;
+        min-height: 550px;
+    }
+}
 /* ==========================================================================
     6. ABOUT SECTION
    ========================================================================== */
@@ -464,6 +479,12 @@ a {
         grid-template-columns: 1fr;
         gap: 70px;
         padding: 120px 25px 130px calc(25px + var(--axis));
+    }
+
+    @media (max-height: 800px) {
+        min-height: auto;
+        padding-top: 120px;
+        padding-bottom: 80px;
     }
 }
 
@@ -543,6 +564,12 @@ a {
         line-height: 0.75;
         letter-spacing: -0.05em;
     }
+
+    @media (max-height: 800px) {
+        min-height: auto;
+        padding-top: 120px;
+        padding-bottom: 80px;
+    }
 }
 
 .projects-intro-text {
@@ -555,6 +582,12 @@ a {
     padding: 100px var(--padding) 180px calc(var(--padding) + var(--axis));
     border-top: 1px solid var(--line);
     overflow: hidden;
+
+    @media (max-height: 800px) {
+        min-height: 650px;
+        padding-top: 80px;
+        padding-bottom: 120px; 
+    }
 }
 
 .project-category {
@@ -578,9 +611,16 @@ a {
     &::before {
         content: '';
         position: absolute;
-        inset: 20px;       /* dokładnie tam gdzie są linie cross-border */
+        inset: 20px;
         background: var(--bg);
-        z-index: 0;         /* pod zdjęciem i pod pałąkami */
+        z-index: 0;
+    }
+
+    @media (max-height: 800px) {
+        height: 80vh;
+        max-height: 500px;
+        width: auto;
+        aspect-ratio: 1;
     }
 }
 
@@ -1092,6 +1132,13 @@ a {
     padding: 150px var(--padding) 70px calc(var(--padding) + var(--axis));
     border-top: 1px solid var(--line);
     overflow: hidden;
+
+    @media (max-height: 800px) {
+        height: auto;
+        min-height: 80vh;
+        padding-top: 100px;
+        padding-bottom: 60px;
+    }
 }
 
 .contact-layout {
