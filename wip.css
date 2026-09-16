@@ -147,7 +147,18 @@ a {
     height: 100vh;
     z-index: 10;
     pointer-events: none;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        background: var(--bg);
+    }
 }
+
 
 .axis-line {
     position: absolute;
@@ -188,7 +199,7 @@ a {
         border-top: 1px solid var(--line);
         border-bottom: 1px solid var(--line);
         pointer-events: none;
-        z-index: 2;
+        z-index: 6;
     }
 
     &::after {
@@ -201,7 +212,7 @@ a {
         border-right: 1px solid var(--line);
         border-left: 1px solid var(--line);
         pointer-events: none;
-        z-index: 2;
+        z-index: 6;
     }
 }
 
@@ -563,6 +574,14 @@ a {
     aspect-ratio: 1;
     z-index: 1;
     transform: translateY(-50%);
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 20px;       /* dokładnie tam gdzie są linie cross-border */
+        background: var(--bg);
+        z-index: 0;         /* pod zdjęciem i pod pałąkami */
+    }
 }
 
 .project-image-left {
@@ -1166,8 +1185,18 @@ a {
 /* tests */
 
 .project.background {
-    background-image: url('images/to_do_strony.png');
+    
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+
+    &.moss-cafe {
+        background-image: url('images/tło-moss-cafe.png');
+    }
+    &.murale {
+        background-image: url('images/tło-murale.png');
+    }
+    &.wokol-dywanu {
+        background-image: url('images/tło-wokol-dywanu.png')
+    }
 }
