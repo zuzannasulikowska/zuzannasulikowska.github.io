@@ -24,6 +24,30 @@ const LIGHTBOX_ANIM_MS = 280; // musi pasować do czasu transition w CSS
 let currentProjectImages = [];
 let currentImageIndex = 0;
 
+// Mapowanie ID projektu na klasę tła (te same klasy co w sekcjach .project)
+const PROJECT_BG_CLASSES = {
+    'project-euforma': 'euforma',
+    'project-kawiarnia': 'moss-cafe',
+    'project-krzeslo': 'fotel',
+    'project-wokol-dywanu': 'wokol-dywanu',
+    'project-osowa-gora': 'murale'
+};
+
+// --- NAWIGACJA MIĘDZY PROJEKTAMI (strzałki lewo/prawo) ---
+const modalPrevProjectBtn = document.getElementById('modal-prev-project');
+const modalNextProjectBtn = document.getElementById('modal-next-project');
+
+// Kolejność przełączania strzałkami — taka jak na stronie
+const PROJECT_ORDER = [
+    'project-euforma',
+    'project-kawiarnia',
+    'project-krzeslo',
+    'project-wokol-dywanu',
+    'project-osowa-gora'
+];
+
+let currentProjectId = null;
+
 // 1. ŁADOWANIE DANYCH Z JSON
 async function loadProjectData(projectId) {
     try {
@@ -40,6 +64,20 @@ async function loadProjectData(projectId) {
         console.error('Błąd podczas ładowania pliku JSON:', error);
     }
 }
+
+const modalBgMask = document.getElementById('modal-bg-mask');
+const modalInfoSide = document.querySelector('.modal-info-side');
+
+const BG_MASK_OFFSET = -20;
+
+function positionBgMask() {
+    if (!modalBgMask || !modalInfoSide) return;
+    if (modal.getAttribute('aria-hidden') === 'true') return;
+    const rect = modalInfoSide.getBoundingClientRect();
+    modalBgMask.style.left = `${rect.left + BG_MASK_OFFSET}px`;
+}
+
+window.addEventListener('resize', positionBgMask);
 
 // 2. RENDEROWANIE ZAWARTOŚCI MODALA
 function renderModalContent(data) {
@@ -98,6 +136,36 @@ function renderModalContent(data) {
 }
 
 // 3. UNIWERSALNE FUNKCJE OTWIERANIA / ZAMYKANIA
+
+// Otwieranie projektu po ID (używane zarówno przez kliknięcie karty, jak i strzałki)
+async function openProject(projectId) {
+    currentProjectId = projectId;
+
+    await loadProjectData(projectId);
+
+    // Ustaw tło modala zgodnie z projektem
+    modal.classList.remove('background', ...Object.values(PROJECT_BG_CLASSES));
+    const bgClass = PROJECT_BG_CLASSES[projectId];
+    if (bgClass) {
+        modal.classList.add('background', bgClass);
+    }
+
+    modal.setAttribute('aria-hidden', 'false');
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+
+    requestAnimationFrame(positionBgMask);
+}
+
+// Przełączanie na sąsiedni projekt w kolejności PROJECT_ORDER (zapętlone)
+function goToAdjacentProject(direction) {
+    if (!currentProjectId) return;
+    const currentIndex = PROJECT_ORDER.indexOf(currentProjectId);
+    if (currentIndex === -1) return;
+
+    const nextIndex = (currentIndex + direction + PROJECT_ORDER.length) % PROJECT_ORDER.length;
+    openProject(PROJECT_ORDER[nextIndex]);
+}
 
 // Otwieranie dowolnego zdjęcia w Lightboxie
 function openLightbox(index) {
@@ -184,8 +252,9 @@ function closeLightbox(e) {
 function closeModal(e) {
     if (e) e.preventDefault();
     modal.setAttribute('aria-hidden', 'true');
-    modal.classList.remove('is-open');
+    modal.classList.remove('is-open', 'background', ...Object.values(PROJECT_BG_CLASSES));
     document.body.style.overflow = '';
+    currentProjectId = null;
 }
 
 // 4. OBSŁUGA ZDARZEŃ (EVENT LISTENERS)
@@ -198,17 +267,15 @@ document.addEventListener('click', async (e) => {
     const projectCard = trigger.closest('[data-project-id]');
     if (!projectCard) return;
 
-    const projectId = projectCard.dataset.projectId;
-
-    await loadProjectData(projectId);
-
-    modal.setAttribute('aria-hidden', 'false');
-    modal.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
+    openProject(projectCard.dataset.projectId);
 });
 
 // Zamykanie modala głównego
 modalCloseBtn.addEventListener('click', closeModal);
+
+// Strzałki nawigacji między projektami
+if (modalPrevProjectBtn) modalPrevProjectBtn.addEventListener('click', () => goToAdjacentProject(-1));
+if (modalNextProjectBtn) modalNextProjectBtn.addEventListener('click', () => goToAdjacentProject(1));
 
 // Powiększanie zdjęcia Hero w Lightboxie
 heroTargetSlot.addEventListener('click', (e) => {
@@ -237,7 +304,7 @@ lightbox.addEventListener('click', (e) => {
     }
 });
 
-// Zamykanie okien klawiszem ESC
+// Zamykanie okien klawiszem ESC, nawigacja projektami strzałkami klawiatury
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         if (lightbox.getAttribute('aria-hidden') === 'false') {
@@ -245,6 +312,16 @@ document.addEventListener('keydown', (e) => {
         } else if (modal.getAttribute('aria-hidden') === 'false') {
             closeModal();
         }
+        return;
+    }
+
+    // Nawigacja między projektami strzałkami, tylko gdy modal otwarty, a lightbox zamknięty
+    const isModalOpen = modal.getAttribute('aria-hidden') === 'false';
+    const isLightboxOpen = lightbox.getAttribute('aria-hidden') === 'false';
+
+    if (isModalOpen && !isLightboxOpen) {
+        if (e.key === 'ArrowLeft') goToAdjacentProject(-1);
+        if (e.key === 'ArrowRight') goToAdjacentProject(1);
     }
 });
 

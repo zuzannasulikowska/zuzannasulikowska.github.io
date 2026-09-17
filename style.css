@@ -803,16 +803,16 @@ a {
 }
 
 .modal-container {
+    position: relative;
+    z-index: 1; /* treść nad maską */
     max-width: 1400px;
     margin: 2rem auto 0;
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     gap: 4rem;
     align-items: start;
-}
 
-@media (max-width: 992px) {
-    .modal-container {
+    @media (max-width: 992px) {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
@@ -935,15 +935,10 @@ a {
     }
 }
 
-/* Modal Info Side */
-.modal-info-side {
-    display: flex;
-    flex-direction: column;
 
+.modal-info-side {
     .modal-project-title {
         margin: 1rem 0;
-        /* margin-top: 1rem; */
-        /* margin-bottom: 2.5rem; */
         color: var(--black);
         font-size: var(--fs-modal-title);
         font-weight: 300;
@@ -983,6 +978,104 @@ a {
     line-height: 1.6;
     text-align: justify;
     
+}
+
+.modal-overlay.background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    @media (max-width: 992px) {
+        background-image: none !important
+    }
+}
+
+.modal-overlay.moss-cafe      { background-image: url('images/tło-moss-cafe.png'); }
+.modal-overlay.murale         { background-image: url('images/tło-murale.png'); }
+.modal-overlay.wokol-dywanu   { background-image: url('images/tło-wokol-dywanu.png'); }
+.modal-overlay.euforma        { background-image: url('images/tło-euforma.png'); }
+.modal-overlay.fotel          { background-image: url('images/tło-chair.png'); }
+
+.modal-bg-mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 100%;
+    background: var(--bg);
+    border-left: 1px solid var(--line);
+    z-index: 0;
+    pointer-events: none;
+    display: none;
+}
+
+.modal-overlay.background.is-open .modal-bg-mask {
+    display: block;
+}
+
+@media (max-width: 992px) {
+    .modal-bg-mask {
+        display: none !important;
+    }
+}
+
+.modal-nav-btn {
+    position: fixed;
+    top: 50%;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--black);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 300;
+    cursor: pointer;
+    z-index: 101;
+    transform: translateY(-50%);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+
+    &:hover {
+        background: var(--black);
+        color: var(--cream);
+        border-color: var(--black);
+    }
+}
+
+.modal-nav-prev {
+    left: 2rem;
+}
+
+.modal-nav-next {
+    right: 2rem;
+}
+
+@media (max-width: 1300px) {
+    .modal-nav-prev {
+        left: 1.5rem;
+    }
+
+    .modal-nav-next {
+        right: 1.5rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .modal-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .modal-nav-prev {
+        left: 0.75rem;
+    }
+
+    .modal-nav-next {
+        right: 0.75rem;
+    }
 }
 
 /* Lightbox Modal */
