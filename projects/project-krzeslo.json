@@ -1,32 +1,34 @@
 {
     "id": "project-krzeslo",
-    "badge": "Autorskie krzesło",
-    "title": "ECO CHAIR",
+    "badge": "Projekt fotela",
+    "title": "MEBEL ECO",
     "heroImage": {
         "src": "images/krzeslo-pod-katem.webp",
-        "caption": "Krzesło pod kątem"
+        "caption": "Fotel pod kątem"
     },
     "specs": [
-        { "label": "ROK", "val": "2069" },
-        { "label": "KATEGORIA", "val": "Mebel" },
-        { "label": "ZAKRES", "val": "Struganie sklejki & przeginanie druta" }
+        { "label": "Autor", "val": "Zuzanna Sulikowska" },
+        { "label": "Kategoria", "val": "autorski mebel"},
+        { "label": "Rok projektu", "val": "2021/2022" }
     ],
     "description": [
-        "Tutaj musimy wymyślić co byś chciała żeby było napisane.",
-        "Gdybyś się martwiła to te wyżej wypisane specyfikacje też mogą być jakie tylko chcesz. Więc nie martw się i wymyślaj skarbie."
+        "Projekt fotela stworzony z myślą o zrównoważonym designie, trwałości oraz świadomej konsumpcji. To mebel. w którym minimalistyczna forma łączy się z funkcjonalnością i troską o środowisko naturalne.",
+        "Prosta, elegancka sylwetka oparta na kontrastywnych materiałach sprawia, że fotel idealnie wpsiuje się we współczene, stonowane wnętrza, stanowiąc stabilny punkt wyciszenia i relaksu.",
+        "Do konstrukcji wykorzystano wytrzymały metal oraz naturalne drewno, które można z łatwością poddać procesom renowacji i odświeżenia. Część tapicerowana została zaprojektowan z myślą o łatwym zdejmowaniu pokrowca, co umożliwia jego wygodne czyszczenie i wydłuża żywotność mebla.",
+        "Każdy element fotela zaplanowano w sposób umożliwiający prosty demontaż - w przypadku uszkodzenia danej częśći można ją bezproblemowo wymienić na nową, zamiast zastępować cały mebel."
     ],
     "gallery": [
         {
         "src": "images/krzeslo-od-przodu.webp",
-        "caption": "Krzesło od przodu."
+        "caption": "Fotel od przodu."
         },
         {
         "src": "images/krzeslo-od-boku.webp",
-        "caption": "Krzesło od boku."
+        "caption": "Fotel od boku."
         },
         {
         "src": "images/krzeslo-od-tylu.webp",
-        "caption": "Krzesło od tyłu."
+        "caption": "Fotel od tyłu."
         }
     ]
 }

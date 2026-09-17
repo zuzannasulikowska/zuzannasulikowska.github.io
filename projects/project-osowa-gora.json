@@ -1,20 +1,21 @@
 {
     "id": "project-osowa-gora",
-    "badge": "BYDGOSZCZ, OSIEDLE",
-    "title": "KONCEPCJA MURALI OSOWA GÓRA",
+    "badge": "Koncept murali",
+    "title": "Rewitalizacja elewacji bloków",
     "heroImage": {
         "src": "images/mural-sardynki-irl.webp",
-        "caption": "Reder muralu"
+        "caption": "Mural z sardynkami."
     },
     "specs": [
-        { "label": "LOKALIZACJA", "val": "Bydgoszcz, Osowa Góra" },
-        { "label": "ROK", "val": "2026" },
-        { "label": "KATEGORIA", "val": "Sztuka Uliczna / Mural" },
-        { "label": "ZAKRES", "val": "Koncepcja graficzna & Projekt" }
+        { "label": "Autor", "val": "Zuzanna Sulikowska" },
+        { "label": "Lokalizacji", "val": "Bydgoszcz, osiedle Osowa Góra" },
+        { "label": "Kategoria", "val": "sztuka uliczna / mural" },
+        { "label": "Rok projektu", "val": "2022/2023" }
     ],
     "description": [
-        "Koncepcja murali dla osiedla Osowa Góra opiera się na harmonijnym połączeniu geometrii z motywami organicznymi. Projekt ma na celu ożywienie wielkopłytowej architektury.",
-        "Do stworzenia kompozycji użyto stonowanej palety barw nawiązującej do okolicznych terenów zielonych oraz naturalnego światła."
+        "Koncepcja kolorystyczno-graficzna rewitalizacji elewacji budynków mieszkalnych na osiedlu Osowa Góra przy placu zabaw. Projekt stanowi twórcze połączenie lokalnej historii z nowoczesnym designem w przestrzeni publicznej.",
+        "Ślady osadnictwa na tym terenie sięgają epoki kamiennej, gdy głównym zajęciem ludności było rybołówstwo. Przygotowane wielkoformatowe murale stanowią żywe przypomnienie historycznego dziedzictwa miejsca, nawiązując bezpośrednio do nazw sąsiadujących ulic (ul. Wielorybia, Łososiowa, Kutrowa, Sardynkowa).",
+        "Tło w odcieniu morskiego seledynu w połączeniu z geometrycznymi uproszczonymi wielokątami form graficznych nadaje elewacjom nowoczesny, dynamiczny rytm, który harmonizuje z architekturą bloków."
     ],
     "gallery": [
         {
@@ -23,7 +24,7 @@
         },
         {
         "src": "images/mural-z-kutrem.webp",
-        "caption": "Mureal od ulicy kutrowej."
+        "caption": "Mural od ulicy kutrowej."
         },
         {
         "src": "images/mural-z-łososiem.webp",

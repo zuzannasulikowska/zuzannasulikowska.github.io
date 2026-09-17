@@ -1,19 +1,22 @@
 {
     "id": "project-kawiarnia",
-    "badge": "Projekt designu kawiarni",
+    "badge": "Projekt wnętrza cukierni / kawiarni",
     "title": "Moss Café",
     "heroImage": {
         "src": "images/kawiarnia-lewa-strona.webp",
         "caption": "Lewa strona kawiarni."
     },
     "specs": [
-        { "label": "Cyberpunk?", "val": "2077" },
-        { "label": "KATEGORIA", "val": "kawiarnia?" },
-        { "label": "Cock", "val": "and Ball torturez" }
+        { "label": "Autor", "val": "Zuzanna Sulikowska" },
+        { "label": "Kategoria", "val": "projekt wnętrz"},
+        { "label": "Powierzchnia", "val": "lokal: 250 m²"},
+        { "label": "", "val": "przestrzeń dla gości: 113 m²"},
+        { "label": "Rok projektu", "val": "2022/2023" }
     ],
     "description": [
-        "Okręt nasz wpłynął w mgłę i fregaty dwie,  Popłynęły naszym kursem by nie zgubić się.  Potem szkwał wypchnął nas poza mleczny pas  I nikt wtedy nie przypuszczał,  że fregaty śmierć nam niosą.",
-        "Ciepła krew poleje się strugami,   Wygra ten, kto utrzyma ship.    W huku dział ktoś przykryje się falami, Jak da Bóg, ocalimy bryg."
+        "Leśny Klimat - projekt wnętrza cukierni, dla której główną inspiracją stała się struktura i miękkość leśnego mchu oraz bogactwo runa leśnego. Przestrzeń konsumpcyjna została zaprojektowana w taki sposób, aby przywoływać odczucie przebywania w samym sercu cichego, spokojnego lasu.",
+        "Wykorzystanie naturalnych surowców, takich jak chropowana kora drzew na ścianach, drewniane blaty wykonane z plastrów pni, pozwala gościom na całkowite oderawanie się od miejskiego zgiełku.",
+        "Tradycyjne krzesła zastąpiono miękkimi, wygodnymi pufami i siedziskami. Ich głębokie odcienie czerwieni i granatu nawiązują formą i barwą do owoców leśnych - malin, jagód oraz borówek. Puchato intensywnie zielony dywan wyglądem przypomina leśny mech, których również znalazł swoje zastosowanie na leśnej ściane oraz jako element dekoracji lady witającej gości."
     ],
     "gallery": [
         {

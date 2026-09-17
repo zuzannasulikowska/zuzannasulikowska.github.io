@@ -979,6 +979,8 @@ a {
     color: var(--black);
     font-size: var(--fs-medium);
     line-height: 1.6;
+    text-align: justify;
+    
 }
 
 /* Lightbox Modal */

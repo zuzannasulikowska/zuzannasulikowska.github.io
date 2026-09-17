@@ -1,0 +1,35 @@
+{
+    "id": "project-euforma",
+    "badge": "Projekt wnętrz małego mieszkania",
+    "title": "Kawalerka Jazzowa",
+    "heroImage": {
+        "src": "",
+        "caption": ""
+    },
+    "specs": [
+        { "label": "Autor", "val": "Zuzanna Sulikowska" },
+        { "label": "Kategoria", "val": "projekt wnętrz"},
+        { "label": "Powierzchnia", "val": "38 m²" },
+        { "label": "Rok projektu", "val": "2021/2022" }
+    ],
+    "description": [
+        "Koncepcja wnętrza małego mieszkania insirowanego muzyką jazzzową oraz estetyką lat 60. i 70. Stylistyka opiera się na kontrastowych materiałach, nasyconych barwach i muzycznych akcentach, które nadają mieszkaniu unikalny, klubowo-loftowy charakter.",
+        "Projekt stanowi idealną harmonię funkcjonalnej przestrzeni do pracy twórczej z klimatycznym miejscem do odpoczynku i spotkań towarzyskich.",
+        "Główną ścianę zdobi intensywny fiolet będący tłem dla kolekcji plakatów jazzowych. Ciemnogranatowa zabudowa kuchenna z wyspą o czarnym, uziarnionym blacie komponuje się z jasną ścianą z cegły, parkietem ułożonym w jodełkę oraz industrialnym oświetleniem na drewnianej belce.",
+        "W strefie prywantnej/roboczej zastosowane antresolę z łóżkiem ustuowanym powyżej domowego biurka i regałó na książki. Konstrukcja z ciemnego drewna i stalowych lameli skutecznie wydziela strefę do pracy twórczej oraz przechowywania."
+    ],
+    "gallery": [
+        {
+        "src": "",
+        "caption": ""
+        },
+        {
+        "src": "",
+        "caption": ""
+        },
+        {
+        "src": "",
+        "caption": ""
+        }
+    ]
+}

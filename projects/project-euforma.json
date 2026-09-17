@@ -7,14 +7,17 @@
         "caption": "Lobby z logiem na ścianie."
     },
     "specs": [
-        { "label": "Meble?", "val": "Euforma." },
-        { "label": "Krzesła?", "val": "Euforma." },
-        { "label": "Stoliki i kanapy?", "val": "Eufroma." },
-        { "label": "Hotel?", "val": "Trivago!"}
+        { "label": "Autor", "val": "Zuzanna Sulikowska" },
+        { "label": "Kategoria", "val": "projekt wnętrz"},
+        { "label": "Lokalizacja", "val": "Bydgoszcz" },
+        { "label": "Powierzchnia", "val": "195 m²" },
+        { "label": "Rok projektu", "val": "2021/2022"}
     ],
     "description": [
-        "Zrobiła takie ładne renderki wymyślonego salonu meblowego!!!",
-        "Patrzcie i podziwiajcie śmiertelnicy. ☠️"
+        "Projekt wnętrza salonu meblowego \"Euforma\" to przestrzeń, w której surowy, industrialny charakter spotyka się z finezją nowoczesnego designu. To wnętrze stworzone jako dynamiczna platforma ekspozycyjna, celebrująca hasło \"Wnętrza made in Poland\".",
+        "Paleta oparta na kontrastach - surowej cegle, gładkim betonie i głebokiej czerni - stanowi idealne tło dla kolorowych akcentów mebli. Naturalne światło, wpadające przez wielkoformatowe okna, ożywia przestrzeń, tworząc przyjazną atmosferę do odkyrwania polskiego designu. Zastosowane przy tym metalowe ramy w formie przegrody, które subtelnie dzielą przestrzeń na strefy. Równocześnie nie zakłócają przepływu naturalnego światła i zachowują pełną transparentność wnętrza.",
+        "Głównym punktem ekspozycji jest autorski, wielopoziomowy regał na krzesła. Kolorowe tła nisz podkreślają unikalność każdego modelu, tworząć efektowną, barwną mozaikę polskiego wzornictwa.",
+        "Surowość materiałów wykończeniowych przełamuje żywy akcent - roślinne logo firmy \"Euforma\" oraz liczne donice z zielenią, wproawdzjące biofiliczny element harmonii i spokoju."
     ],
     "gallery": [
         {
@@ -27,7 +30,7 @@
         },
         {
         "src": "images/euforma-krzesla.webp",
-        "caption": "Krzestła na ściane w formie dekoracji."
+        "caption": "Regał ekspozycyjny na krzesła."
         }
     ]
 }

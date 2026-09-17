@@ -1,48 +1,52 @@
 {
     "id": "project-wokol-dywanu",
-    "badge": "Autorskie mieszkanie",
+    "badge": "Projekt dyplomowy licencjacki - haptyczne tkaniny w domu dla osób z dysfunkcją zmysłu dotyku",
     "title": "Wokół dywanu",
     "heroImage": {
         "src": "images/wokol-dywanu-salon-kuchnia.webp",
-        "caption": "Krzesło pod kątem"
+        "caption": "Widok na salon łączony z kuchnią."
     },
     "specs": [
-        { "label": "ROK", "val": "2069" },
-        { "label": "KATEGORIA", "val": "Mebel" },
-        { "label": "ZAKRES", "val": "Struganie sklejki & przeginanie druta" }
+        { "label": "Autor", "val": "Zuzanna Sulikowska" },
+        { "label": "Kategoria", "val": "projekt wnętrz"},
+        { "label": "Powierzchnia", "val": "85 m²" },
+        { "label": "Rok projektu", "val": "2023/2024" }
     ],
     "description": [
-        "Tutaj musimy wymyślić co byś chciała żeby było napisane.",
-        "Gdybyś się martwiła to te wyżej wypisane specyfikacje też mogą być jakie tylko chcesz. Więc nie martw się i wymyślaj skarbie."
+        "Koncepcja mieszkania zaprojektowanego z myślą o osobie z dysfunkcją zmysłu dotyku, w której kluczową rolę odgrywają haptyczne tkaniny oraz dywany dedykowane terapii sensorycznej w warunkach domowych. Przestrzeń lączy walory terapeutyczne z estetyką nowoczesnego wnętrza.",
+        "Projekt opiera się na palecie kolorów nawiązującej do trendu Nature Engineered (z targów tkanin Heimtextil 23/24), który podkreśla naturalne pochodzenie materiałów oraz ich pozytywny wpływ na środowisko.",
+        "Sercem projektu jest zestaw interakywnych, modułowych dywanów sensorycznych, które pełnią rolę zarówno użytkową, jak i terapeutyczną. Dywany składją się z mobilnych części o zróżnicowanych fakturach i kształtach (głównym motywem jest tu motyw koła), które można dowolnie przekształcać z elementu dekoracyjnego w obiekt do prowadzenia terapii sensorycznej. Sypialnie posiadają spersonalizowane wersje dywanów dopasowane do potrzeb mieszkańców.",
+        "Otwarta część wspólna wyznaczona została przez pojemny regał i szafę oddzielającą strefę komunikacyjną. W salonie znajduje się miejsce połączenia wszystkich 4 dywanów aby mogły funkcjonować jako jedna całość.",
+        "Rozszerzeniem mieszkania jest ogród z tarasem wykonanym z wielkoformatowych płyt kamiennych i betownowych. Na tarasie zaprojektowano zewnętrzną matę sensoryczną odporną na czynniki atmosferyczne, wykorzystującą naturalne materiały, takie jak trzcina i wiklina."
     ],
     "gallery": [
         {
         "src": "images/wokol-dywanu-korytarz.webp",
-        "caption": "Krzesło od przodu."
+        "caption": "Korytarz mieszkania."
         },
         {
         "src": "images/wokol-dywanu-kuchnia.webp",
-        "caption": "Krzesło od boku."
+        "caption": "Kuchnia ze stołem jadalnianym."
         },
         {
         "src": "images/wokol-dywanu-lazienka-prysznic.webp",
-        "caption": "Krzesło od tyłu."
+        "caption": "Łazienka z prysznicem."
         },
         {
         "src": "images/wokol-dywanu-lazienka-toaleta.webp",
-        "caption": "Krzesło od tyłu."
+        "caption": "Łazienka od strony prysznica."
         },
         {
         "src": "images/wokol-dywanu-salon-telewizor.webp",
-        "caption": "Krzesło od tyłu."
+        "caption": "Salon z tarasem."
         },
         {
         "src": "images/wokol-dywanu-sypialnia.webp",
-        "caption": "Krzesło od tyłu."
+        "caption": "Sypialnia / biuro."
         },
         {
         "src": "images/wokol-dywanu-taras.webp",
-        "caption": "Krzesło od tyłu."
+        "caption": "Taras z ogrodem."
         }
     ]
 }
