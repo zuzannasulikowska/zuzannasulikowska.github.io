@@ -43,7 +43,8 @@ const PROJECT_ORDER = [
     'project-kawiarnia',
     'project-krzeslo',
     'project-wokol-dywanu',
-    'project-osowa-gora'
+    'project-osowa-gora',
+    'project-jazz'
 ];
 
 let currentProjectId = null;

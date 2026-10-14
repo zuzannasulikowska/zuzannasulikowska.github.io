@@ -10,6 +10,7 @@
     --brown: #75615b;
     --red: #c93435;
     --blue: #4474a7;
+    --orange: #B0473C;
     --line: rgba(23, 21, 21, 0.45);
     --little-dim: rgba(0, 0, 0, 0.2);
     --big-dim: rgba(0, 0, 0, 0.92);
@@ -138,6 +139,7 @@ a {
 .project[data-project-id="project-krzeslo"]     { --orb-color: var(--olive); }
 .project[data-project-id="project-wokol-dywanu"]{ --orb-color: var(--cream); }
 .project[data-project-id="project-osowa-gora"]  { --orb-color: var(--blue); }
+.project[data-project-id="project-jazz"]        { --orb-color: var(--orange);}
 
 /* Vertical Axis */
 .vertical-axis {
